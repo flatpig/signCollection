@@ -31,3 +31,4 @@ jobs:
           cd ~/scripts
           node jd_moneyTree.js
         env:
+          IQIYI_COOKIE: ${{ secrets.IQIYI_COOKIE }}
