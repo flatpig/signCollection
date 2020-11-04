@@ -29,6 +29,6 @@ jobs:
       - name: '运行 【爱奇艺签到】'
         run: |
           cd ~/scripts
-          node jd_moneyTree.js
+          node iqiyi.js
         env:
           IQIYI_COOKIE: ${{ secrets.IQIYI_COOKIE }}
