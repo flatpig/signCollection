@@ -1,0 +1,12 @@
+{
+  "name": "flatpig",
+  "version": "1.0.0",
+  "description": "auto-sign",
+  "main": "index.js",
+  "repository": "https://github.com/flatpig/signCollection.git",
+  "author": "jzclc@126.com",
+  "license": "MIT",
+  "dependencies": {
+    "request": "^2.88.2"
+  }
+}
