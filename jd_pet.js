@@ -1,6 +1,6 @@
 /*
 东东萌宠 更新地址： https://raw.githubusercontent.com/lxk0301/scripts/master/jd_pet.js
-更新时间：2020-11-07
+更新时间：2020-11-04
 已支持IOS双京东账号,Node.js支持N个京东账号
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 
@@ -57,7 +57,7 @@ let randomCount = 20;
       if (!$.isLogin) {
         $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/`, {"open-url": "https://bean.m.jd.com/"});
         $.setdata('', `CookieJD${i ? i + 1 : "" }`);//cookie失效，故清空cookie。
-        if ($.isNode()) await notify.sendNotify(`${$.name}cookie已失效 - ${$.UserName}`, `京东账号${$.index} ${$.UserName}\n请重新登录获取cookie`);
+        if ($.isNode()) await notify.sendNotify(`${$.name}cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取cookie`);
         continue
       }
       message = '';
@@ -67,6 +67,7 @@ let randomCount = 20;
       option = {};
       await shareCodesFormat();
       await jdPet();
+      await showMsg();
     }
   }
 })()
@@ -94,7 +95,7 @@ async function jdPet() {
       option['open-url'] = "openApp.jdMobile://";
       $.msg($.name, `【提醒⏰】${$.petInfo.goodsInfo.goodsName}已可领取`, '请去京东APP或微信小程序查看', option);
       if ($.isNode()) {
-        await notify.sendNotify(`${$.name} - 账号${$.index} - ${$.nickName || $.UserName}奖品已可领取`, `京东账号${$.index} ${$.nickName}\n${$.petInfo.goodsInfo.goodsName}已可领取`);
+        await notify.sendNotify(`${$.name}奖品已可领取`, `京东账号${$.index} ${$.nickName}\n${$.petInfo.goodsInfo.goodsName}已可领取`);
       }
       return
     }
@@ -112,7 +113,6 @@ async function jdPet() {
     await doTask();//做日常任务
     await feedPetsAgain();//再次投食
     await energyCollect();//收集好感度
-    await showMsg();
     console.log('全部任务完成, 如果帮助到您可以点下🌟STAR鼓励我一下, 明天见~');
   } else if (initPetTownRes.code === '0'){
     console.log(`初始化萌宠失败:  ${initPetTownRes.message}`);
@@ -452,7 +452,7 @@ function shareCodesFormat() {
     }
     const readShareCodeRes = await readShareCode();
     if (readShareCodeRes && readShareCodeRes.code === 200) {
-      newShareCodes = [...new Set([...newShareCodes, ...(readShareCodeRes.data || [])])];
+      newShareCodes = newShareCodes.concat(readShareCodeRes.data || []);
     }
     console.log(`第${$.index}个京东账号将要助力的好友${JSON.stringify(newShareCodes)}`)
     resolve();
@@ -474,7 +474,8 @@ function requireConfig() {
       })
       if (process.env.JD_DEBUG && process.env.JD_DEBUG === 'false') console.log = () => {};
     } else {
-      cookiesArr.push(...[$.getdata('CookieJD'), $.getdata('CookieJD2')]);
+      cookiesArr.push($.getdata('CookieJD'));
+      cookiesArr.push($.getdata('CookieJD2'));
     }
     console.log(`共${cookiesArr.length}个京东账号\n`)
     if ($.isNode()) {

@@ -61,7 +61,7 @@ let randomCount = 20;
       if (!$.isLogin) {
         $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/`, {"open-url": "https://bean.m.jd.com/"});
         $.setdata('', `CookieJD${i ? i + 1 : "" }`);//cookie失效，故清空cookie。
-        if ($.isNode()) await notify.sendNotify(`${$.name}cookie已失效 - ${$.UserName}`, `京东账号${$.index} ${$.UserName}\n请重新登录获取cookie`);
+        if ($.isNode()) await notify.sendNotify(`${$.name}cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取cookie`);
         continue
       }
       message = '';
@@ -121,7 +121,7 @@ async function doGetReward() {
       message += `【上期兑换京豆】${$.getReward.data.awardBean}个\n`;
       $.msg($.name, subTitle, message);
       if ($.isNode()) {
-        await notify.sendNotify(`${$.name} - 账号${$.index} - ${$.nickName || $.UserName}`, `京东账号${$.index} ${$.nickName}\n${message}`);
+        await notify.sendNotify(`${$.name}`, `京东账号${$.index} ${$.nickName}\n${message}`);
       }
     }
   } else if (awardState === '6') {
@@ -531,7 +531,7 @@ function shareCodesFormat() {
     }
     const readShareCodeRes = await readShareCode();
     if (readShareCodeRes && readShareCodeRes.code === 200) {
-      newShareCodes = [...new Set([...newShareCodes, ...(readShareCodeRes.data || [])])];
+      newShareCodes = newShareCodes.concat(readShareCodeRes.data || []);
     }
     console.log(`第${$.index}个京东账号将要助力的好友${JSON.stringify(newShareCodes)}`)
     resolve();
@@ -553,7 +553,8 @@ function requireConfig() {
       })
       if (process.env.JD_DEBUG && process.env.JD_DEBUG === 'false') console.log = () => {};
     } else {
-      cookiesArr.push(...[$.getdata('CookieJD'), $.getdata('CookieJD2')]);
+      if ($.getdata('CookieJD')) cookiesArr.push($.getdata('CookieJD'));
+      if ($.getdata('CookieJD2')) cookiesArr.push($.getdata('CookieJD2'));
     }
     console.log(`共${cookiesArr.length}个京东账号\n`)
     if ($.isNode()) {
