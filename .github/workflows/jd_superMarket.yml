@@ -6,13 +6,14 @@ name: jd_superMarket
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 */3 * * *'
+    - cron: '15 * * * *'
   # watch:
   #   types: started
   repository_dispatch:
     types: superMarket
 jobs:
   build:
+
     runs-on: ubuntu-latest
     if: github.event.repository.owner.id == github.event.sender.id
     steps:
