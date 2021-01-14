@@ -23,7 +23,7 @@ jobs:
           cd ~/Actions/.github/scripts
           chmod +x jd_sharecodes.sh
           ./jd_sharecodes.sh
-          git clone -b master https://github.com/flatpig/signCollection.git ~/scripts
+          git clone -b master https://gitlab.com/MrRight/Scripts.git ~/scripts
           cd  ~/scripts
           npm install
           node jd_get_share_code.js
