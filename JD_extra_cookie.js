@@ -3,15 +3,14 @@
 
 Author: 2Ya
 
-Github: https://github.com/domping
+Github: https://github.com/dompling
 
 ===================
 特别说明：
-1.获取多个京东cookie文件，不和野比大佬的文件冲突。暂不支持野比大佬脚本签到。
-2.若是要使用京东多合一签到，请使用修改版地址：https://raw.githubusercontent.com/dompling/Script/master/jd/JD_extra.js
+1.获取多个京东cookie的脚本，不和NobyDa的京东cookie冲突。
 ===================
 ===================
-使用方式：复制 https://home.m.jd.com/myJd/newhome.action 到浏览器打开 ，在个人中心自动获取 cookie，
+使用方式：在代理软件配置好下方配置后，复制 https://home.m.jd.com/myJd/newhome.action 到浏览器打开 ，在个人中心自动获取 cookie，
 若弹出成功则正常使用。否则继续再此页面继续刷新一下试试
 ===================
 
@@ -22,13 +21,13 @@ hostname = wq.jd.com
 【Surge脚本配置】:
 ===================
 [Script]
-获取京东Cookie = type=http-request,pattern=^https:\/\/wq\.jd\.com\/user_new\/info\/GetJDUserInfoUnion,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/flatpig/signCollection/master/JD_extra_cookie.js,script-update-interval=0
+获取京东Cookie = type=http-request,pattern=^https:\/\/wq\.jd\.com\/user_new\/info\/GetJDUserInfoUnion,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/JD_extra_cookie.js,script-update-interval=0
 
 ===================
 【Loon脚本配置】:
 ===================
 [Script]
-http-request https:\/\/wq\.jd\.com\/user_new\/info\/GetJDUserInfoUnion tag=获取京东Cookie, script-path=https://raw.githubusercontent.com/flatpig/signCollection/master/JD_extra_cookie.js
+http-request https:\/\/wq\.jd\.com\/user_new\/info\/GetJDUserInfoUnion tag=获取京东Cookie, script-path=https://raw.githubusercontent.com/lxk0301/jd_scripts/master/JD_extra_cookie.js
 
 
 ===================
@@ -36,25 +35,25 @@ http-request https:\/\/wq\.jd\.com\/user_new\/info\/GetJDUserInfoUnion tag=获�
 ===================
 
 [rewrite_local]
-https:\/\/wq\.jd\.com\/user_new\/info\/GetJDUserInfoUnion  url script-request-header https://raw.githubusercontent.com/flatpig/signCollection/master/JD_extra_cookie.js
+https:\/\/wq\.jd\.com\/user_new\/info\/GetJDUserInfoUnion  url script-request-header https://raw.githubusercontent.com/lxk0301/jd_scripts/master/JD_extra_cookie.js
 
  */
 
-const APIKey = 'CookiesJD';
+const APIKey = "CookiesJD";
 $ = new API(APIKey, true);
 const CacheKey = `#${APIKey}`;
 if ($request) GetCookie();
 
 function getCache() {
-  var cache = $.read(CacheKey) || '[]';
+  var cache = $.read(CacheKey) || "[]";
   $.log(cache);
   return JSON.parse(cache);
 }
 
 function GetCookie() {
   try {
-    if ($request.headers && $request.url.indexOf('GetJDUserInfoUnion') > -1) {
-      var CV = $request.headers['Cookie'] || $request.headers['cookie'];
+    if ($request.headers && $request.url.indexOf("GetJDUserInfoUnion") > -1) {
+      var CV = $request.headers["Cookie"] || $request.headers["cookie"];
       if (CV.match(/(pt_key=.+?pt_pin=|pt_pin=.+?pt_key=)/)) {
         var CookieValue = CV.match(/pt_key=.+?;/) + CV.match(/pt_pin=.+?;/);
         var UserName = CookieValue.match(/pt_pin=(.+?);/)[1];
@@ -62,7 +61,7 @@ function GetCookie() {
         var CookiesData = getCache();
         var updateCookiesData = [...CookiesData];
         var updateIndex;
-        var CookieName = '【账号】';
+        var CookieName = "【账号】";
         var updateCodkie = CookiesData.find((item, index) => {
           var ck = item.cookie;
           var Account = ck
@@ -76,37 +75,37 @@ function GetCookie() {
           }
           return verify;
         });
-        var tipPrefix = '';
+        var tipPrefix = "";
         if (updateCodkie) {
           updateCookiesData[updateIndex].cookie = CookieValue;
           CookieName = `【账号${updateIndex + 1}】`;
-          tipPrefix = '更新京东';
+          tipPrefix = "更新京东";
         } else {
           updateCookiesData.push({
             userName: DecodeName,
             cookie: CookieValue,
           });
-          CookieName = '【账号' + updateCookiesData.length + '】';
-          tipPrefix = '首次写入京东';
+          CookieName = "【账号" + updateCookiesData.length + "】";
+          tipPrefix = "首次写入京东";
         }
-        const cacheValue = JSON.stringify(updateCookiesData, null, '\t');
+        const cacheValue = JSON.stringify(updateCookiesData, null, "\t");
         $.write(cacheValue, CacheKey);
         $.notify(
-          '用户名: ' + DecodeName,
-          '',
-          tipPrefix + CookieName + 'Cookie成功 🎉'
+          "用户名: " + DecodeName,
+          "",
+          tipPrefix + CookieName + "Cookie成功 🎉"
         );
       } else {
-        $.notify('写入京东Cookie失败', '', '请查看脚本内说明, 登录网页获取 ‼️');
+        $.notify("写入京东Cookie失败", "", "请查看脚本内说明, 登录网页获取 ‼️");
       }
       $.done();
       return;
     } else {
-      $.notify('写入京东Cookie失败', '', '请检查匹配URL或配置内脚本类型 ‼️');
+      $.notify("写入京东Cookie失败", "", "请检查匹配URL或配置内脚本类型 ‼️");
     }
   } catch (eor) {
-    $.write('', CacheKey);
-    $.notify('写入京东Cookie失败', '', '已尝试清空历史Cookie, 请重试 ⚠️');
+    $.write("", CacheKey);
+    $.notify("写入京东Cookie失败", "", "已尝试清空历史Cookie, 请重试 ⚠️");
     console.log(
       `\n写入京东Cookie出现错误 ‼️\n${JSON.stringify(
         eor
