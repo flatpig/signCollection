@@ -37,29 +37,31 @@ const notify = $.isNode() ? require('./sendNotify') : '';
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 
 //IOS等用户直接用NobyDa的jd cookie
-let cookiesArr = [], cookie = '', message = '';
-let isPurchaseShops = false;//是否一键加购商品到购物车，默认不加购
+let cookiesArr = [],
+  cookie = '',
+  message = '';
+let isPurchaseShops = false; //是否一键加购商品到购物车，默认不加购
 $.helpToken = [];
 if ($.isNode()) {
-  Object.keys(jdCookieNode).forEach((item) => {
-    cookiesArr.push(jdCookieNode[item])
-  })
+  Object.keys(jdCookieNode).forEach(item => {
+    cookiesArr.push(jdCookieNode[item]);
+  });
   if (process.env.JD_DEBUG && process.env.JD_DEBUG === 'false') console.log = () => {};
 } else {
-  cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
+  cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || '[]').map(item => item.cookie)].filter(item => !!item);
 }
 $.newShareCodes = [];
 const JD_API_HOST = 'https://lkyl.dianpusoft.cn/api';
 
 !(async () => {
   if (!cookiesArr[0]) {
-    $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
+    $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', { 'open-url': 'https://bean.m.jd.com/bean/signIndex.action' });
     return;
   }
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
-      $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
+      $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]);
       $.index = i + 1;
       $.isLogin = true;
       $.nickName = '';
@@ -67,43 +69,48 @@ const JD_API_HOST = 'https://lkyl.dianpusoft.cn/api';
       await TotalBean();
       console.log(`\n*******开始【京东账号${$.index}】${$.nickName || $.UserName}********\n`);
       if (!$.isLogin) {
-        $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
+        $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, { 'open-url': 'https://bean.m.jd.com/bean/signIndex.action' });
 
         if ($.isNode()) {
           await notify.sendNotify(`${$.name}cookie已失效 - ${$.UserName}`, `京东账号${$.index} ${$.UserName}\n请重新登录获取cookie`);
         }
-        continue
+        continue;
       }
       await smallHome();
     }
   }
-  $.inviteCodes = await getAuthorShareCode('https://raw.githubusercontent.com/Aaron-lv/updateTeam/master/shareCodes/jd_updateSmallHomeInviteCode.json')
-  if (!$.inviteCodes) {
-    $.http.get({url: 'https://purge.jsdelivr.net/gh/Aaron-lv/updateTeam@master/shareCodes/jd_updateSmallHomeInviteCode.json'}).then((resp) => {}).catch((e) => $.log('刷新CDN异常', e));
-    await $.wait(1000)
-    $.inviteCodes = await getAuthorShareCode('https://cdn.jsdelivr.net/gh/Aaron-lv/updateTeam@master/shareCodes/jd_updateSmallHomeInviteCode.json')
-  }
+  // $.inviteCodes = await getAuthorShareCode('https://raw.githubusercontent.com/Aaron-lv/updateTeam/master/shareCodes/jd_updateSmallHomeInviteCode.json')
+  // if (!$.inviteCodes) {
+  //   $.http.get({url: 'https://purge.jsdelivr.net/gh/Aaron-lv/updateTeam@master/shareCodes/jd_updateSmallHomeInviteCode.json'}).then((resp) => {}).catch((e) => $.log('刷新CDN异常', e));
+  //   await $.wait(1000)
+  //   $.inviteCodes = await getAuthorShareCode('https://cdn.jsdelivr.net/gh/Aaron-lv/updateTeam@master/shareCodes/jd_updateSmallHomeInviteCode.json')
+  // }
+  $.inviteCodes = { inviteCode: [] };
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
       $.token = $.helpToken[i];
-      $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
+      $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]);
       if ($.newShareCodes.length > 1) {
         // console.log('----', (i + 1) % $.newShareCodes.length)
-        let code = $.newShareCodes[(i + 1) % $.newShareCodes.length]['code']
-        console.log(`\n${$.UserName} 去给自己的下一账号 ${decodeURIComponent($.newShareCodes[(i + 1) % $.newShareCodes.length]['cookie'].match(/pt_pin=([^; ]+)(?=;?)/) && $.newShareCodes[(i + 1) % $.newShareCodes.length]['cookie'].match(/pt_pin=([^; ]+)(?=;?)/)[1])}助力，助力码为 ${code}`)
+        let code = $.newShareCodes[(i + 1) % $.newShareCodes.length]['code'];
+        console.log(
+          `\n${$.UserName} 去给自己的下一账号 ${decodeURIComponent(
+            $.newShareCodes[(i + 1) % $.newShareCodes.length]['cookie'].match(/pt_pin=([^; ]+)(?=;?)/) && $.newShareCodes[(i + 1) % $.newShareCodes.length]['cookie'].match(/pt_pin=([^; ]+)(?=;?)/)[1],
+          )}助力，助力码为 ${code}`,
+        );
         await createAssistUser(code, $.createAssistUserID);
       }
       await helpFriends();
     }
   }
 })()
-    .catch((e) => {
-      $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
-    })
-    .finally(() => {
-      $.done();
-    })
+  .catch(e => {
+    $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '');
+  })
+  .finally(() => {
+    $.done();
+  });
 async function smallHome() {
   try {
     await loginHome();
@@ -118,20 +125,20 @@ async function smallHome() {
     await queryFurnituresCenterList();
     await showMsg();
   } catch (e) {
-    $.logErr(e)
+    $.logErr(e);
   }
 }
 function showMsg() {
   return new Promise(resolve => {
     $.msg($.name, '', `【京东账号${$.index}】${$.nickName}\n${message}`);
-    resolve()
-  })
+    resolve();
+  });
 }
 async function lottery() {
   if ($.freeDrawCount > 0) {
     await drawRecord($.lotteryId);
   } else {
-    console.log(`免费抽奖机会今日已使用\n`)
+    console.log(`免费抽奖机会今日已使用\n`);
   }
 }
 
@@ -139,8 +146,8 @@ async function doChannelsListTask(taskId, taskType) {
   await queryChannelsList(taskId);
   for (let item of $.queryChannelsList) {
     if (item.showOrder === 1) {
-      await $.wait(1000)
-      await followChannel(taskId, item.id)
+      await $.wait(1000);
+      await followChannel(taskId, item.id);
       await queryDoneTaskRecord(taskId, taskType);
     }
   }
@@ -149,18 +156,18 @@ async function helpFriends() {
   // await updateInviteCode();
   // if (!$.inviteCodes) await updateInviteCodeCDN();
   if ($.inviteCodes && $.inviteCodes['inviteCode'] && $.inviteCodes['inviteCode'].length) {
-    console.log(`\n去帮助作者\n`)
+    console.log(`\n去帮助作者\n`);
     for (let item of $.inviteCodes.inviteCode) {
-      if (!item) continue
+      if (!item) continue;
       await createAssistUser(item, $.createAssistUserID);
     }
   }
 }
 async function doAllTask() {
-  await queryAllTaskInfo();//获取任务详情列表$.taskList
-  console.log(` 任务名称   完成进度 `)
+  await queryAllTaskInfo(); //获取任务详情列表$.taskList
+  console.log(` 任务名称   完成进度 `);
   for (let item of $.taskList) {
-    console.log(`${item.ssjjTaskInfo.name}      ${item.doneNum}/${item.ssjjTaskInfo.awardOfDayNum || (item.ssjjTaskInfo.type === 1 ? 4: 1)}`)
+    console.log(`${item.ssjjTaskInfo.name}      ${item.doneNum}/${item.ssjjTaskInfo.awardOfDayNum || (item.ssjjTaskInfo.type === 1 ? 4 : 1)}`);
   }
   for (let item of $.taskList) {
     if (item.ssjjTaskInfo.type === 1) {
@@ -172,16 +179,16 @@ async function doAllTask() {
     if (item.ssjjTaskInfo.type === 2) {
       //每日打卡
       if (item.doneNum >= (item.ssjjTaskInfo.awardOfDayNum || 1)) {
-        console.log(`${item.ssjjTaskInfo.name}已完成[${item.doneNum}/${item.ssjjTaskInfo.awardOfDayNum || 1}]`)
-        continue
+        console.log(`${item.ssjjTaskInfo.name}已完成[${item.doneNum}/${item.ssjjTaskInfo.awardOfDayNum || 1}]`);
+        continue;
       }
-      await clock(item.ssjjTaskInfo.id, item.ssjjTaskInfo.awardWoB)
+      await clock(item.ssjjTaskInfo.id, item.ssjjTaskInfo.awardWoB);
     }
     // 限时连连看
     if (item.ssjjTaskInfo.type === 3) {
       if (item.doneNum >= item.ssjjTaskInfo.awardOfDayNum) {
-        console.log(`${item.ssjjTaskInfo.name}已完成[${item.doneNum}/${item.ssjjTaskInfo.awardOfDayNum}]`)
-        continue
+        console.log(`${item.ssjjTaskInfo.name}已完成[${item.doneNum}/${item.ssjjTaskInfo.awardOfDayNum}]`);
+        continue;
       }
       for (let i = 0; i < new Array(item.ssjjTaskInfo.awardOfDayNum || 1).fill('').length; i++) {
         await game(item.ssjjTaskInfo.id, item.doneNum);
@@ -190,19 +197,19 @@ async function doAllTask() {
     if (item.ssjjTaskInfo.type === 4) {
       //关注店铺
       if (item.doneNum >= item.ssjjTaskInfo.awardOfDayNum) {
-        console.log(`${item.ssjjTaskInfo.name}已完成[${item.doneNum}/${item.ssjjTaskInfo.awardOfDayNum}]`)
-        continue
+        console.log(`${item.ssjjTaskInfo.name}已完成[${item.doneNum}/${item.ssjjTaskInfo.awardOfDayNum}]`);
+        continue;
       }
       for (let i = 0; i < new Array(item.ssjjTaskInfo.awardOfDayNum).fill('').length; i++) {
-        await followShops('followShops', item.ssjjTaskInfo.id);//一键关注店铺
+        await followShops('followShops', item.ssjjTaskInfo.id); //一键关注店铺
         await queryDoneTaskRecord(item.ssjjTaskInfo.id, item.ssjjTaskInfo.type);
       }
     }
     if (item.ssjjTaskInfo.type === 5) {
       //浏览店铺
       if (item.doneNum >= item.ssjjTaskInfo.awardOfDayNum) {
-        console.log(`${item.ssjjTaskInfo.name}已完成[${item.doneNum}/${item.ssjjTaskInfo.awardOfDayNum}]`)
-        continue
+        console.log(`${item.ssjjTaskInfo.name}已完成[${item.doneNum}/${item.ssjjTaskInfo.awardOfDayNum}]`);
+        continue;
       }
       for (let i = 0; i < new Array(item.ssjjTaskInfo.awardOfDayNum).fill('').length; i++) {
         await browseChannels('browseShops', item.ssjjTaskInfo.id, item.browseId);
@@ -211,38 +218,38 @@ async function doAllTask() {
     if (item.ssjjTaskInfo.type === 6) {
       //关注4个频道
       if (item.doneNum >= item.ssjjTaskInfo.awardOfDayNum) {
-        console.log(`${item.ssjjTaskInfo.name}已完成[${item.doneNum}/${item.ssjjTaskInfo.awardOfDayNum}]`)
-        continue
+        console.log(`${item.ssjjTaskInfo.name}已完成[${item.doneNum}/${item.ssjjTaskInfo.awardOfDayNum}]`);
+        continue;
       }
-      await doChannelsListTask(item.ssjjTaskInfo.id, item.ssjjTaskInfo.type)
+      await doChannelsListTask(item.ssjjTaskInfo.id, item.ssjjTaskInfo.type);
     }
     if (item.ssjjTaskInfo.type === 7) {
       //浏览3个频道
       if (item.doneNum >= item.ssjjTaskInfo.awardOfDayNum) {
-        console.log(`${item.ssjjTaskInfo.name}已完成[${item.doneNum}/${item.ssjjTaskInfo.awardOfDayNum}]`)
-        continue
+        console.log(`${item.ssjjTaskInfo.name}已完成[${item.doneNum}/${item.ssjjTaskInfo.awardOfDayNum}]`);
+        continue;
       }
       for (let i = 0; i < new Array(item.ssjjTaskInfo.awardOfDayNum || 1).fill('').length; i++) {
         await browseChannels('browseChannels', item.ssjjTaskInfo.id, item.browseId);
       }
     }
-    isPurchaseShops = $.isNode() ? (process.env.PURCHASE_SHOPS ? process.env.PURCHASE_SHOPS : isPurchaseShops) : ($.getdata("isPurchaseShops") ? $.getdata("isPurchaseShops") : isPurchaseShops);
+    isPurchaseShops = $.isNode() ? (process.env.PURCHASE_SHOPS ? process.env.PURCHASE_SHOPS : isPurchaseShops) : $.getdata('isPurchaseShops') ? $.getdata('isPurchaseShops') : isPurchaseShops;
     if (isPurchaseShops && item.ssjjTaskInfo.type === 9) {
       //加购商品
       if (item.doneNum >= item.ssjjTaskInfo.awardOfDayNum) {
-        console.log(`${item.ssjjTaskInfo.name}已完成[${item.doneNum}/${item.ssjjTaskInfo.awardOfDayNum}]`)
-        continue
+        console.log(`${item.ssjjTaskInfo.name}已完成[${item.doneNum}/${item.ssjjTaskInfo.awardOfDayNum}]`);
+        continue;
       }
       for (let i = 0; i < new Array(item.ssjjTaskInfo.awardOfDayNum).fill('').length; i++) {
-        await followShops('purchaseCommodities', item.ssjjTaskInfo.id);//一键加购商品
+        await followShops('purchaseCommodities', item.ssjjTaskInfo.id); //一键加购商品
         await queryDoneTaskRecord(item.ssjjTaskInfo.id, item.ssjjTaskInfo.type);
       }
     }
     if (item.ssjjTaskInfo.type === 10) {
       //浏览商品
       if (item.doneNum >= item.ssjjTaskInfo.awardOfDayNum) {
-        console.log(`${item.ssjjTaskInfo.name}已完成[${item.doneNum}/${item.ssjjTaskInfo.awardOfDayNum}]`)
-        continue
+        console.log(`${item.ssjjTaskInfo.name}已完成[${item.doneNum}/${item.ssjjTaskInfo.awardOfDayNum}]`);
+        continue;
       }
       for (let i = 0; i < new Array(item.ssjjTaskInfo.awardOfDayNum).fill('').length; i++) {
         await browseChannels('browseCommodities', item.ssjjTaskInfo.id, item.browseId);
@@ -251,11 +258,11 @@ async function doAllTask() {
     if (item.ssjjTaskInfo.type === 11) {
       //浏览会场
       if (item.doneNum >= item.ssjjTaskInfo.awardOfDayNum) {
-        console.log(`${item.ssjjTaskInfo.name}已完成[${item.doneNum}/${item.ssjjTaskInfo.awardOfDayNum}]`)
-        continue
+        console.log(`${item.ssjjTaskInfo.name}已完成[${item.doneNum}/${item.ssjjTaskInfo.awardOfDayNum}]`);
+        continue;
       }
       for (let i = 0; i < new Array(item.ssjjTaskInfo.awardOfDayNum || 1).fill('').length; i++) {
-        await browseChannels('browseMeetings' ,item.ssjjTaskInfo.id, item.browseId);
+        await browseChannels('browseMeetings', item.ssjjTaskInfo.id, item.browseId);
       }
       // await browseChannels('browseMeetings' ,item.ssjjTaskInfo.id, item.browseId);
       // await doAllTask();
@@ -267,8 +274,8 @@ function queryFurnituresCenterList() {
     $.get(taskUrl(`ssjj-furnitures-center/queryFurnituresCenterList`), async (err, resp, data) => {
       try {
         if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} API请求失败，请检查网路重试`)
+          console.log(`${JSON.stringify(err)}`);
+          console.log(`${$.name} API请求失败，请检查网路重试`);
         } else {
           if (safeGet(data)) {
             data = JSON.parse(data);
@@ -277,14 +284,14 @@ function queryFurnituresCenterList() {
                 let { buy, list } = data.body;
                 $.canBuyList = [];
                 list.map((item, index) => {
-                  if (buy.some((buyItem) => buyItem === item.id)) return
+                  if (buy.some(buyItem => buyItem === item.id)) return;
                   $.canBuyList.push(item);
-                })
+                });
                 $.canBuyList.sort(sortByjdBeanNum);
                 if ($.canBuyList[0].needWoB <= $.woB) {
                   await furnituresCenterPurchase($.canBuyList[0].id, $.canBuyList[0].jdBeanNum);
                 } else {
-                  console.log(`\n兑换${$.canBuyList[0].jdBeanNum}京豆失败:当前wo币${$.woB}不够兑换所需的${$.canBuyList[0].needWoB}WO币`)
+                  console.log(`\n兑换${$.canBuyList[0].jdBeanNum}京豆失败:当前wo币${$.woB}不够兑换所需的${$.canBuyList[0].needWoB}WO币`);
                   message += `【装饰领京豆】兑换${$.canBuyList[0].jdBeanNum}京豆失败,原因:WO币不够\n`;
                 }
                 // for (let canBuyItem of $.canBuyList) {
@@ -298,12 +305,12 @@ function queryFurnituresCenterList() {
           }
         }
       } catch (e) {
-        $.logErr(e, resp)
+        $.logErr(e, resp);
       } finally {
         resolve(data);
       }
-    })
-  })
+    });
+  });
 }
 //装饰领京豆
 function furnituresCenterPurchase(id, jdBeanNum) {
@@ -311,24 +318,24 @@ function furnituresCenterPurchase(id, jdBeanNum) {
     $.post(taskPostUrl(`ssjj-furnitures-center/furnituresCenterPurchase/${id}`), async (err, resp, data) => {
       try {
         if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} API请求失败，请检查网路重试`)
+          console.log(`${JSON.stringify(err)}`);
+          console.log(`${$.name} API请求失败，请检查网路重试`);
         } else {
           if (safeGet(data)) {
             data = JSON.parse(data);
             if (data.head.code === 200) {
               message += `【装饰领京豆】${jdBeanNum}兑换成功\n`;
-              await notify.sendNotify($.name, `【京东账号 ${$.index}】 ${$.UserName || $.nickName}\n【装饰领京豆】${jdBeanNum}兑换成功`)
+              await notify.sendNotify($.name, `【京东账号 ${$.index}】 ${$.UserName || $.nickName}\n【装饰领京豆】${jdBeanNum}兑换成功`);
             }
           }
         }
       } catch (e) {
-        $.logErr(e, resp)
+        $.logErr(e, resp);
       } finally {
         resolve(data);
       }
-    })
-  })
+    });
+  });
 }
 
 //获取详情
@@ -337,8 +344,8 @@ function queryByUserId() {
     $.get(taskUrl(`ssjj-wo-home-info/queryByUserId/2`), (err, resp, data) => {
       try {
         if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} API请求失败，请检查网路重试`)
+          console.log(`${JSON.stringify(err)}`);
+          console.log(`${$.name} API请求失败，请检查网路重试`);
         } else {
           if (safeGet(data)) {
             data = JSON.parse(data);
@@ -352,12 +359,12 @@ function queryByUserId() {
           }
         }
       } catch (e) {
-        $.logErr(e, resp)
+        $.logErr(e, resp);
       } finally {
         resolve(data);
       }
-    })
-  })
+    });
+  });
 }
 //获取需要关注的频道列表
 function queryChannelsList(taskId) {
@@ -365,8 +372,8 @@ function queryChannelsList(taskId) {
     $.get(taskUrl(`ssjj-task-channels/queryChannelsList/${taskId}`), (err, resp, data) => {
       try {
         if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} API请求失败，请检查网路重试`)
+          console.log(`${JSON.stringify(err)}`);
+          console.log(`${$.name} API请求失败，请检查网路重试`);
         } else {
           if (safeGet(data)) {
             data = JSON.parse(data);
@@ -378,25 +385,25 @@ function queryChannelsList(taskId) {
           }
         }
       } catch (e) {
-        $.logErr(e, resp)
+        $.logErr(e, resp);
       } finally {
         resolve(data);
       }
-    })
-  })
+    });
+  });
 }
 
 //浏览频道，浏览会场，浏览商品，浏览店铺API
-function browseChannels(functionID ,taskId, browseId) {
+function browseChannels(functionID, taskId, browseId) {
   return new Promise(resolve => {
     $.get(taskUrl(`/ssjj-task-record/${functionID}/${taskId}/${browseId}`), (err, resp, data) => {
       try {
         if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} API请求失败，请检查网路重试`)
+          console.log(`${JSON.stringify(err)}`);
+          console.log(`${$.name} API请求失败，请检查网路重试`);
         } else {
           if (safeGet(data)) {
-            console.log(`${functionID === 'browseChannels' ? '浏览频道' : functionID === 'browseMeetings' ? '浏览会场' : functionID === 'browseShops' ? '浏览店铺' : '浏览商品'}`, data)
+            console.log(`${functionID === 'browseChannels' ? '浏览频道' : functionID === 'browseMeetings' ? '浏览会场' : functionID === 'browseShops' ? '浏览店铺' : '浏览商品'}`, data);
             data = JSON.parse(data);
             if (data.head.code === 200) {
               if (data.body) {
@@ -406,12 +413,12 @@ function browseChannels(functionID ,taskId, browseId) {
           }
         }
       } catch (e) {
-        $.logErr(e, resp)
+        $.logErr(e, resp);
       } finally {
         resolve(data);
       }
-    })
-  })
+    });
+  });
 }
 //记录已关注的频道
 function queryDoneTaskRecord(taskId, taskType) {
@@ -419,8 +426,8 @@ function queryDoneTaskRecord(taskId, taskType) {
     $.get(taskUrl(`/ssjj-task-record/queryDoneTaskRecord/${taskType}/${taskId}`), (err, resp, data) => {
       try {
         if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} API请求失败，请检查网路重试`)
+          console.log(`${JSON.stringify(err)}`);
+          console.log(`${$.name} API请求失败，请检查网路重试`);
         } else {
           if (safeGet(data)) {
             data = JSON.parse(data);
@@ -432,12 +439,12 @@ function queryDoneTaskRecord(taskId, taskType) {
           }
         }
       } catch (e) {
-        $.logErr(e, resp)
+        $.logErr(e, resp);
       } finally {
         resolve(data);
       }
-    })
-  })
+    });
+  });
 }
 //一键关注店铺，一键加购商品API
 function followShops(functionID, taskId) {
@@ -445,26 +452,26 @@ function followShops(functionID, taskId) {
     $.get(taskUrl(`/ssjj-task-record/${functionID}/${taskId}`), (err, resp, data) => {
       try {
         if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} API请求失败，请检查网路重试`)
+          console.log(`${JSON.stringify(err)}`);
+          console.log(`${$.name} API请求失败，请检查网路重试`);
         } else {
           if (safeGet(data)) {
             data = JSON.parse(data);
             if (data.head.code === 200) {
               if (data.body) {
-                console.log(`${functionID === 'followShops'? '一键关注店铺': '一键加购商品'}结果：${data.head.msg}`);
+                console.log(`${functionID === 'followShops' ? '一键关注店铺' : '一键加购商品'}结果：${data.head.msg}`);
                 // message += `【限时连连看】成功，活动${awardWoB}WO币\n`;
               }
             }
           }
         }
       } catch (e) {
-        $.logErr(e, resp)
+        $.logErr(e, resp);
       } finally {
         resolve(data);
       }
-    })
-  })
+    });
+  });
 }
 //关注频道API
 function followChannel(taskId, channelId) {
@@ -472,8 +479,8 @@ function followChannel(taskId, channelId) {
     $.get(taskUrl(`/ssjj-task-record/followChannel/${channelId}/${taskId}`), (err, resp, data) => {
       try {
         if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} API请求失败，请检查网路重试`)
+          console.log(`${JSON.stringify(err)}`);
+          console.log(`${$.name} API请求失败，请检查网路重试`);
         } else {
           if (safeGet(data)) {
             data = JSON.parse(data);
@@ -485,20 +492,20 @@ function followChannel(taskId, channelId) {
           }
         }
       } catch (e) {
-        $.logErr(e, resp)
+        $.logErr(e, resp);
       } finally {
         resolve(data);
       }
-    })
-  })
+    });
+  });
 }
 function createInviteUser() {
   return new Promise(resolve => {
     $.get(taskUrl(`/ssjj-task-record/createInviteUser`), (err, resp, data) => {
       try {
         if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} API请求失败，请检查网路重试`)
+          console.log(`${JSON.stringify(err)}`);
+          console.log(`${$.name} API请求失败，请检查网路重试`);
         } else {
           if (safeGet(data)) {
             data = JSON.parse(data);
@@ -507,19 +514,19 @@ function createInviteUser() {
                 if (data.body.id) {
                   console.log(`\n您的${$.name}shareCode(每天都是变化的):【${data.body.id}】\n`);
                   $.shareCode = data.body.id;
-                  $.newShareCodes.push({ 'code': data.body.id, 'token': $.token, cookie });
+                  $.newShareCodes.push({ code: data.body.id, token: $.token, cookie });
                 }
               }
             }
           }
         }
       } catch (e) {
-        $.logErr(e, resp)
+        $.logErr(e, resp);
       } finally {
         resolve(data);
       }
-    })
-  })
+    });
+  });
 }
 
 function createAssistUser(inviteId, taskId) {
@@ -528,14 +535,14 @@ function createAssistUser(inviteId, taskId) {
     $.get(taskUrl(`/ssjj-task-record/createAssistUser/${inviteId}/${taskId}`), (err, resp, data) => {
       try {
         if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} API请求失败，请检查网路重试`)
+          console.log(`${JSON.stringify(err)}`);
+          console.log(`${$.name} API请求失败，请检查网路重试`);
         } else {
           if (safeGet(data)) {
             data = JSON.parse(data);
             if (data.head.code === 200) {
               if (data.body) {
-                console.log(`给好友${data.body.inviteId}:【${data.head.msg}】\n`)
+                console.log(`给好友${data.body.inviteId}:【${data.head.msg}】\n`);
               }
             } else {
               console.log(`助力失败${JSON.stringify(data)}\n`);
@@ -543,20 +550,20 @@ function createAssistUser(inviteId, taskId) {
           }
         }
       } catch (e) {
-        $.logErr(e, resp)
+        $.logErr(e, resp);
       } finally {
         resolve(data);
       }
-    })
-  })
+    });
+  });
 }
 function game(taskId, index, awardWoB = 100) {
   return new Promise(resolve => {
     $.get(taskUrl(`/ssjj-task-record/game/${index}/${taskId}`), (err, resp, data) => {
       try {
         if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} API请求失败，请检查网路重试`)
+          console.log(`${JSON.stringify(err)}`);
+          console.log(`${$.name} API请求失败，请检查网路重试`);
         } else {
           if (safeGet(data)) {
             data = JSON.parse(data);
@@ -568,20 +575,20 @@ function game(taskId, index, awardWoB = 100) {
           }
         }
       } catch (e) {
-        $.logErr(e, resp)
+        $.logErr(e, resp);
       } finally {
         resolve(data);
       }
-    })
-  })
+    });
+  });
 }
 function clock(taskId, awardWoB) {
   return new Promise(resolve => {
     $.get(taskUrl(`/ssjj-task-record/clock/${taskId}`), (err, resp, data) => {
       try {
         if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} API请求失败，请检查网路重试`)
+          console.log(`${JSON.stringify(err)}`);
+          console.log(`${$.name} API请求失败，请检查网路重试`);
         } else {
           if (safeGet(data)) {
             data = JSON.parse(data);
@@ -593,20 +600,20 @@ function clock(taskId, awardWoB) {
           }
         }
       } catch (e) {
-        $.logErr(e, resp)
+        $.logErr(e, resp);
       } finally {
         resolve(data);
       }
-    })
-  })
+    });
+  });
 }
 function queryAllTaskInfo() {
   return new Promise(resolve => {
     $.get(taskUrl(`ssjj-task-info/queryAllTaskInfo/2`), (err, resp, data) => {
       try {
         if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} API请求失败，请检查网路重试`)
+          console.log(`${JSON.stringify(err)}`);
+          console.log(`${$.name} API请求失败，请检查网路重试`);
         } else {
           if (safeGet(data)) {
             data = JSON.parse(data);
@@ -618,12 +625,12 @@ function queryAllTaskInfo() {
           }
         }
       } catch (e) {
-        $.logErr(e, resp)
+        $.logErr(e, resp);
       } finally {
         resolve();
       }
-    })
-  })
+    });
+  });
 }
 //免费抽奖
 function drawRecord(id) {
@@ -631,8 +638,8 @@ function drawRecord(id) {
     $.get(taskUrl(`ssjj-draw-record/draw/${id}`), (err, resp, data) => {
       try {
         if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} API请求失败，请检查网路重试`)
+          console.log(`${JSON.stringify(err)}`);
+          console.log(`${$.name} API请求失败，请检查网路重试`);
         } else {
           if (safeGet(data)) {
             data = JSON.parse(data);
@@ -646,46 +653,46 @@ function drawRecord(id) {
           }
         }
       } catch (e) {
-        $.logErr(e, resp)
+        $.logErr(e, resp);
       } finally {
         resolve(data);
       }
-    })
-  })
+    });
+  });
 }
 //查询免费抽奖机会
 function queryDraw() {
   return new Promise(resolve => {
-    $.get(taskUrl("ssjj-draw-center/queryDraw"), (err, resp, data) => {
+    $.get(taskUrl('ssjj-draw-center/queryDraw'), (err, resp, data) => {
       try {
         if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} API请求失败，请检查网路重试`)
+          console.log(`${JSON.stringify(err)}`);
+          console.log(`${$.name} API请求失败，请检查网路重试`);
         } else {
           if (safeGet(data)) {
             data = JSON.parse(data);
             if (data.head.code === 200) {
-              $.freeDrawCount = data.body.freeDrawCount;//免费抽奖次数
+              $.freeDrawCount = data.body.freeDrawCount; //免费抽奖次数
               $.lotteryId = data.body.center.id;
             }
           }
         }
       } catch (e) {
-        $.logErr(e, resp)
+        $.logErr(e, resp);
       } finally {
         resolve(data);
       }
-    })
-  })
+    });
+  });
 }
 //查询是否开启了此活动
 function ssjjRooms() {
   return new Promise(resolve => {
-    $.get(taskUrl("ssjj-rooms/info/%E5%AE%A2%E5%8E%85"), (err, resp, data) => {
+    $.get(taskUrl('ssjj-rooms/info/%E5%AE%A2%E5%8E%85'), (err, resp, data) => {
       try {
         if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} API请求失败，请检查网路重试`)
+          console.log(`${JSON.stringify(err)}`);
+          console.log(`${$.name} API请求失败，请检查网路重试`);
         } else {
           if (safeGet(data)) {
             data = JSON.parse(data);
@@ -699,115 +706,129 @@ function ssjjRooms() {
           }
         }
       } catch (e) {
-        $.logErr(e, resp)
+        $.logErr(e, resp);
       } finally {
         resolve(data);
       }
-    })
-  })
+    });
+  });
 }
 function loginHome() {
   return new Promise(resolve => {
     const options = {
-      "url": "https://jdhome.m.jd.com/saas/framework/encrypt/pin?appId=6d28460967bda11b78e077b66751d2b0",
-      "headers": {
-        "Accept": "*/*",
-        "Accept-Encoding": "gzip, deflate, br",
-        "Accept-Language": "zh-cn",
-        "Connection": "keep-alive",
-        "Content-Length": "0",
-        "Content-Type": "application/json",
-        "Cookie": cookie,
-        "Host": "jdhome.m.jd.com",
-        "Origin": "https://jdhome.m.jd.com",
-        "Referer": "https://jdhome.m.jd.com/dist/taro/index.html/",
-        "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
-      }
-    }
+      url: 'https://jdhome.m.jd.com/saas/framework/encrypt/pin?appId=6d28460967bda11b78e077b66751d2b0',
+      headers: {
+        Accept: '*/*',
+        'Accept-Encoding': 'gzip, deflate, br',
+        'Accept-Language': 'zh-cn',
+        Connection: 'keep-alive',
+        'Content-Length': '0',
+        'Content-Type': 'application/json',
+        Cookie: cookie,
+        Host: 'jdhome.m.jd.com',
+        Origin: 'https://jdhome.m.jd.com',
+        Referer: 'https://jdhome.m.jd.com/dist/taro/index.html/',
+        'User-Agent': $.isNode()
+          ? process.env.JD_USER_AGENT
+            ? process.env.JD_USER_AGENT
+            : require('./USER_AGENTS').USER_AGENT
+          : $.getdata('JDUA')
+          ? $.getdata('JDUA')
+          : 'jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1',
+      },
+    };
     $.post(options, async (err, resp, data) => {
       try {
         if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} encrypt/pin API请求失败，请检查网路重试`)
+          console.log(`${JSON.stringify(err)}`);
+          console.log(`${$.name} encrypt/pin API请求失败，请检查网路重试`);
         } else {
           if (safeGet(data)) {
             data = JSON.parse(data);
             if (data.success) {
               await login(data.data.lkEPin);
             } else {
-              console.log(`异常：${JSON.stringify(data)}\n`)
+              console.log(`异常：${JSON.stringify(data)}\n`);
             }
           }
         }
       } catch (e) {
-        $.logErr(e, resp)
+        $.logErr(e, resp);
       } finally {
-        resolve()
+        resolve();
       }
-    })
-  })
+    });
+  });
 }
 function login(userName) {
   return new Promise(resolve => {
     const body = {
-      "body": {
-        "client": 2,
-        userName
-      }
+      body: {
+        client: 2,
+        userName,
+      },
     };
     const options = {
-      "url": `${JD_API_HOST}/user-info/login`,
-      "body": JSON.stringify(body),
-      "headers": {
-        "Accept": "*/*",
-        "Accept-Encoding": "gzip, deflate, br",
-        "Accept-Language": "zh-cn",
-        "Connection": "keep-alive",
-        "Content-Type": "application/json",
-        "Host": "lkyl.dianpusoft.cn",
-        "Origin": "https://lkyl.dianpusoft.cn",
-        "Referer": "https://h5.m.jd.com/babelDiy/Zeus/2HFSytEAN99VPmMGZ6V4EYWus1x/index.html",
-        "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
-      }
-    }
+      url: `${JD_API_HOST}/user-info/login`,
+      body: JSON.stringify(body),
+      headers: {
+        Accept: '*/*',
+        'Accept-Encoding': 'gzip, deflate, br',
+        'Accept-Language': 'zh-cn',
+        Connection: 'keep-alive',
+        'Content-Type': 'application/json',
+        Host: 'lkyl.dianpusoft.cn',
+        Origin: 'https://lkyl.dianpusoft.cn',
+        Referer: 'https://h5.m.jd.com/babelDiy/Zeus/2HFSytEAN99VPmMGZ6V4EYWus1x/index.html',
+        'User-Agent': $.isNode()
+          ? process.env.JD_USER_AGENT
+            ? process.env.JD_USER_AGENT
+            : require('./USER_AGENTS').USER_AGENT
+          : $.getdata('JDUA')
+          ? $.getdata('JDUA')
+          : 'jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1',
+      },
+    };
     $.post(options, async (err, resp, data) => {
       try {
         if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} API请求失败，请检查网路重试`)
+          console.log(`${JSON.stringify(err)}`);
+          console.log(`${$.name} API请求失败，请检查网路重试`);
         } else {
           data = JSON.parse(data);
           if (data.head.code === 200) {
             $.token = data.head.token;
-            $.helpToken.push(data.head.token)
+            $.helpToken.push(data.head.token);
           }
         }
       } catch (e) {
-        $.logErr(e, resp)
+        $.logErr(e, resp);
       } finally {
         resolve(data);
       }
-    })
-  })
+    });
+  });
 }
 function getAuthorShareCode(url) {
   return new Promise(resolve => {
     const options = {
-      url: `${url}?${new Date()}`, "timeout": 10000, headers: {
-        "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/87.0.4280.88"
-      }
+      url: `${url}?${new Date()}`,
+      timeout: 10000,
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/87.0.4280.88',
+      },
     };
     if ($.isNode() && process.env.TG_PROXY_HOST && process.env.TG_PROXY_PORT) {
-      const tunnel = require("tunnel");
+      const tunnel = require('tunnel');
       const agent = {
         https: tunnel.httpsOverHttp({
           proxy: {
             host: process.env.TG_PROXY_HOST,
-            port: process.env.TG_PROXY_PORT * 1
-          }
-        })
-      }
-      Object.assign(options, { agent })
+            port: process.env.TG_PROXY_PORT * 1,
+          },
+        }),
+      };
+      Object.assign(options, { agent });
     }
     $.get(options, async (err, resp, data) => {
       try {
@@ -815,49 +836,61 @@ function getAuthorShareCode(url) {
           // console.log(`${JSON.stringify(err)}`)
           // console.log(`${$.name} API请求失败，请检查网路重试`)
         } else {
-          if (data) data = JSON.parse(data)
+          if (data) data = JSON.parse(data);
         }
       } catch (e) {
         // $.logErr(e, resp)
       } finally {
         resolve(data);
       }
-    })
-  })
+    });
+  });
 }
 function taskUrl(url, body = {}) {
   return {
     url: `${JD_API_HOST}/${url}?body=${escape(body)}`,
     timeout: 10000,
     headers: {
-      "Accept": "*/*",
-      "Accept-Encoding": "gzip, deflate, br",
-      "Accept-Language": "zh-CN,zh;q=0.9",
-      "Connection": "keep-alive",
-      "content-type": "application/json",
-      "Host": "lkyl.dianpusoft.cn",
-      "Referer": "https://h5.m.jd.com/babelDiy/Zeus/2HFSytEAN99VPmMGZ6V4EYWus1x/index.html",
-      "token": $.token,
-      "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1")
-    }
-  }
+      Accept: '*/*',
+      'Accept-Encoding': 'gzip, deflate, br',
+      'Accept-Language': 'zh-CN,zh;q=0.9',
+      Connection: 'keep-alive',
+      'content-type': 'application/json',
+      Host: 'lkyl.dianpusoft.cn',
+      Referer: 'https://h5.m.jd.com/babelDiy/Zeus/2HFSytEAN99VPmMGZ6V4EYWus1x/index.html',
+      token: $.token,
+      'User-Agent': $.isNode()
+        ? process.env.JD_USER_AGENT
+          ? process.env.JD_USER_AGENT
+          : require('./USER_AGENTS').USER_AGENT
+        : $.getdata('JDUA')
+        ? $.getdata('JDUA')
+        : 'jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1',
+    },
+  };
 }
 function taskPostUrl(url) {
   return {
     url: `${JD_API_HOST}/${url}`,
     timeout: 10000,
     headers: {
-      "Accept": "*/*",
-      "Accept-Encoding": "gzip, deflate, br",
-      "Accept-Language": "zh-CN,zh;q=0.9",
-      "Connection": "keep-alive",
-      "content-type": "application/json",
-      "Host": "lkyl.dianpusoft.cn",
-      "Referer": "https://h5.m.jd.com/babelDiy/Zeus/2HFSytEAN99VPmMGZ6V4EYWus1x/index.html",
-      "token": $.token,
-      "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1")
-    }
-  }
+      Accept: '*/*',
+      'Accept-Encoding': 'gzip, deflate, br',
+      'Accept-Language': 'zh-CN,zh;q=0.9',
+      Connection: 'keep-alive',
+      'content-type': 'application/json',
+      Host: 'lkyl.dianpusoft.cn',
+      Referer: 'https://h5.m.jd.com/babelDiy/Zeus/2HFSytEAN99VPmMGZ6V4EYWus1x/index.html',
+      token: $.token,
+      'User-Agent': $.isNode()
+        ? process.env.JD_USER_AGENT
+          ? process.env.JD_USER_AGENT
+          : require('./USER_AGENTS').USER_AGENT
+        : $.getdata('JDUA')
+        ? $.getdata('JDUA')
+        : 'jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1',
+    },
+  };
 }
 function sortByjdBeanNum(a, b) {
   return a['jdBeanNum'] - b['jdBeanNum'];
@@ -865,22 +898,28 @@ function sortByjdBeanNum(a, b) {
 function TotalBean() {
   return new Promise(async resolve => {
     const options = {
-      url: "https://wq.jd.com/user_new/info/GetJDUserInfoUnion?sceneval=2",
+      url: 'https://wq.jd.com/user_new/info/GetJDUserInfoUnion?sceneval=2',
       headers: {
-        Host: "wq.jd.com",
-        Accept: "*/*",
-        Connection: "keep-alive",
+        Host: 'wq.jd.com',
+        Accept: '*/*',
+        Connection: 'keep-alive',
         Cookie: cookie,
-        "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
-        "Accept-Language": "zh-cn",
-        "Referer": "https://home.m.jd.com/myJd/newhome.action?sceneval=2&ufc=&",
-        "Accept-Encoding": "gzip, deflate, br"
-      }
-    }
+        'User-Agent': $.isNode()
+          ? process.env.JD_USER_AGENT
+            ? process.env.JD_USER_AGENT
+            : require('./USER_AGENTS').USER_AGENT
+          : $.getdata('JDUA')
+          ? $.getdata('JDUA')
+          : 'jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1',
+        'Accept-Language': 'zh-cn',
+        Referer: 'https://home.m.jd.com/myJd/newhome.action?sceneval=2&ufc=&',
+        'Accept-Encoding': 'gzip, deflate, br',
+      },
+    };
     $.get(options, (err, resp, data) => {
       try {
         if (err) {
-          $.logErr(err)
+          $.logErr(err);
         } else {
           if (data) {
             data = JSON.parse(data);
@@ -888,7 +927,7 @@ function TotalBean() {
               $.isLogin = false; //cookie过期
               return;
             }
-            if (data['retcode'] === 0 && data.data && data.data.hasOwnProperty("userInfo")) {
+            if (data['retcode'] === 0 && data.data && data.data.hasOwnProperty('userInfo')) {
               $.nickName = data.data.userInfo.baseInfo.nickname;
             }
           } else {
@@ -896,16 +935,16 @@ function TotalBean() {
           }
         }
       } catch (e) {
-        $.logErr(e)
+        $.logErr(e);
       } finally {
         resolve();
       }
-    })
-  })
+    });
+  });
 }
 function safeGet(data) {
   try {
-    if (typeof JSON.parse(data) == "object") {
+    if (typeof JSON.parse(data) == 'object') {
       return true;
     }
   } catch (e) {
@@ -915,12 +954,12 @@ function safeGet(data) {
   }
 }
 function jsonParse(str) {
-  if (typeof str == "string") {
+  if (typeof str == 'string') {
     try {
       return JSON.parse(str);
     } catch (e) {
       console.log(e);
-      $.msg($.name, '', '请勿随意在BoxJs输入框修改内容\n建议通过脚本去获取cookie')
+      $.msg($.name, '', '请勿随意在BoxJs输入框修改内容\n建议通过脚本去获取cookie');
       return [];
     }
   }
