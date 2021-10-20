@@ -199,3 +199,5 @@
 10 15 * * * node /scripts/jd_haier.js >> /scripts/logs/jd_haier.log 2>&1
 # 一加10.8 - 11.13
 10 14 * * * node /scripts/jd_yijia.js >> /scripts/logs/jd_yijia.log 2>&1
+
+4 0-23/6 * * * node /scripts/jd_jx_cashback.js >> /scripts/logs/jd_jx_cashback.log 2>&1
