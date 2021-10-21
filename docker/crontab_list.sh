@@ -17,7 +17,7 @@
 # 酷跑零食街
 18 7,12,20 * * * node /scripts/jd_foodRunning.js >> /scripts/logs/jd_foodRunning.log 2>&1
 # 京喜领88元红包
-30 1,6,12,21 * * * node /scripts/jd_jxlhb.js >> /scripts/logs/jd_jxlhb.log 2>&1
+11 0,7 * * * node /scripts/jd_jxlhb.js >> /scripts/logs/jd_jxlhb.log 2>&1
 # 众筹许愿池
 20 0,2 * * * node /scripts/jd_wish.js >> /scripts/logs/jd_wish.log 2>&1
 # 内容鉴赏官
@@ -194,10 +194,5 @@
 5 12 * * 6 node /scripts/jd_live_lottery_social.js >> /scripts/logs/jd_live_lottery_social.log 2>&1
 
 58 7,15,23 * * * node /scripts/jd_joy_reward_Mod.js >> /scripts/logs/jd_joy_reward_Mod.log 2>&1
-
-# 海尔京东超级品牌日10.8 - 10.15
-10 15 * * * node /scripts/jd_haier.js >> /scripts/logs/jd_haier.log 2>&1
-# 一加10.8 - 11.13
-10 14 * * * node /scripts/jd_yijia.js >> /scripts/logs/jd_yijia.log 2>&1
 
 4 0-23/6 * * * node /scripts/jd_jx_cashback.js >> /scripts/logs/jd_jx_cashback.log 2>&1
