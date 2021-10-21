@@ -49,6 +49,10 @@ let inviteCodes = [];
   } else {
     console.log(`脚本不会自动抽奖，建议活动快结束开启，默认关闭(在10.29日自动开启抽奖),如需自动抽奖请设置环境变量  JD_CITY_EXCHANGE 为true`);
   }
+  if (process.env.CT_R != 'false') {
+    cookiesArr = cookiesArr.sort(() => 0.5 - Math.random());
+    console.log('CK顺序打乱!用来随机内部互助!,如需关闭CT_R为false');
+  }
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
