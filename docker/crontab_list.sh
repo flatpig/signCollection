@@ -20,8 +20,6 @@
 20 0,2 * * * node /scripts/jd_wish.js >> /scripts/logs/jd_wish.log 2>&1
 # 内容鉴赏官
 15 2,5 * * * node /scripts/jd_connoisseur.js >> /scripts/logs/jd_connoisseur.log 2>&1
-# 母婴-跳跳乐
-#1 0,11,21 * * * node /scripts/jd_jump.js >> /scripts/logs/jd_jump.log 2>&1
 # 东东世界
 25 2,10 * * * node /scripts/jd_ddworld.js >> /scripts/logs/jd_ddworld.log 2>&1
 # 东东世界兑换
@@ -215,3 +213,5 @@
 39 1,14 * * * node /scripts/jd_jxdzz.js >> /scripts/logs/jd_jxdzz.log 2>&1
 # 京喜大作战
 10 * * * *  node /scripts/jd_hyj.js >> /scripts/logs/jd_hyj.log 2>&1
+# 选品官
+23 9,10 * * * node /scripts/jd_selectionOfficer.js >> /scripts/logs/jd_selectionOfficer.log 2>&1
