@@ -135,7 +135,7 @@
 # 点点券
 # 20 0,1,20 * * * node /scripts/jd_necklace_new.js >> /scripts/logs/jd_necklace_new.log 2>&1
 # 京小鸽
-30 2,20 * * * node /scripts/jd_jxg.js >> /scripts/logs/jd_jxg.log 2>&1
+#30 2,20 * * * node /scripts/jd_jxg.js >> /scripts/logs/jd_jxg.log 2>&1
 # 送豆得豆
 #24 0,12 * * * node /scripts/jd_sendBeans.js >> /scripts/logs/jd_sendBeans.log 2>&1
 # 领券中心签到
