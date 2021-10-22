@@ -216,4 +216,4 @@
 # 京喜大作战
 39 1,14 * * * node /scripts/jd_jxdzz.js >> /scripts/logs/jd_jxdzz.log 2>&1
 # 京喜大作战
-10 */3 * * *  node /scripts/jd_hyj.js >> /scripts/logs/jd_hyj.log 2>&1
+10 * * * *  node /scripts/jd_hyj.js >> /scripts/logs/jd_hyj.log 2>&1
