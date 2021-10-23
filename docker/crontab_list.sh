@@ -191,7 +191,7 @@
 # 双11环游记
 5 0,6,14 * * * node /scripts/jd_hyj.js >> /scripts/logs/jd_hyj.log 2>&1
 # 选品官
-23 9,10 * * * node /scripts/jd_selectionOfficer.js >> /scripts/logs/jd_selectionOfficer.log 2>&1
+23 9,19 * * * node /scripts/jd_selectionOfficer.js >> /scripts/logs/jd_selectionOfficer.log 2>&1
 # 跳跳乐瓜分京豆
 1 0,11,21 * * * node /scripts/jd_jump.js >> /scripts/logs/jd_jump.log 2>&1
 # 手机狂欢城
