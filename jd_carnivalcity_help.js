@@ -43,12 +43,15 @@ const JD_API_HOST = 'https://api.m.jd.com/api';
     return;
   }
   $.temp = [];
-  $.updatePkActivityIdRes = await getAuthorShareCode('https://raw.githubusercontent.com/inoyna12/updateTeam/master/shareCodes/jd_cityShareCodes.json')
+  $.updatePkActivityIdRes = await getAuthorShareCode('')
   if (!$.updatePkActivityIdRes) {
-    $.http.get({url: 'https://purge.jsdelivr.net/gh/inoyna12/updateTeam@master/shareCodes/jd_cityShareCodes.json'}).then((resp) => {}).catch((e) => $.log('刷新CDN异常', e));
+    $.http.get({url: ''}).then((resp) => {}).catch((e) => $.log('刷新CDN异常', e));
     await $.wait(1000)
-    $.updatePkActivityIdRes = await getAuthorShareCode('https://cdn.jsdelivr.net/gh/inoyna12/updateTeam@master/shareCodes/jd_cityShareCodes.json')
+    $.updatePkActivityIdRes = await getAuthorShareCode('')
   }
+  let tempcode = []
+  tempcode = await getAuthorShareCode('')
+  $.updatePkActivityIdRes = [...$.updatePkActivityIdRes,...(tempcode || [])]
   await requireConfig();
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
