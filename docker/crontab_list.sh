@@ -124,6 +124,7 @@
 5 0 * * * node /scripts/jd_jin_tie.js >> /scripts/logs/jd_jin_tie.log 2>&1
 # 京喜牧场
 15 0-23/3 * * * node /scripts/jd_jxmc.js >> /scripts/logs/jd_jxmc.log 2>&1
+30 0-23/6 * * * node /scripts/jd_jxmc_help.js >> /scripts/logs/jd_jxmc_help.log 2>&1
 # 点点券
 # 20 0,1,20 * * * node /scripts/jd_necklace_new.js >> /scripts/logs/jd_necklace_new.log 2>&1
 # 京小鸽
@@ -188,7 +189,7 @@
 # 京喜大作战
 39 1,14 * * * node /scripts/jd_jxdzz.js >> /scripts/logs/jd_jxdzz.log 2>&1
 # 双11环游记
-#5 0,6,14 * * * node /scripts/jd_hyj.js >> /scripts/logs/jd_hyj.log 2>&1
+5 0,6,14 * * * node /scripts/jd_hyj.js >> /scripts/logs/jd_hyj.log 2>&1
 # 选品官
 23 9,10 * * * node /scripts/jd_selectionOfficer.js >> /scripts/logs/jd_selectionOfficer.log 2>&1
 # 跳跳乐瓜分京豆
