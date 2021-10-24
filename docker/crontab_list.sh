@@ -99,7 +99,7 @@
 # 签到领现金
 10 */4 * * * node /scripts/jd_cash.js >> /scripts/logs/jd_cash.log 2>&1
 # 闪购盲盒
-47 8,22 * * * node /scripts/jd_sgmh.js >> /scripts/logs/jd_sgmh.log 2>&1
+47 8,,16,22 * * * node /scripts/jd_sgmh.js >> /scripts/logs/jd_sgmh.log 2>&1
 # 京东秒秒币
 10 6,21 * * * node /scripts/jd_ms.js >> /scripts/logs/jd_ms.log 2>&1
 # 美丽研究院
@@ -107,7 +107,7 @@
 # 京东保价
 41 0,12,23 * * * node /scripts/jd_priceProtect.js >> /scripts/logs/jd_priceProtect.log 2>&1
 # 京东极速版签到+赚现金任务
-0 7,13,22 * * * node /scripts/jd_speed_sign.js >> /scripts/logs/jd_speed_sign.log 2>&1
+0 7,13,15,22 * * * node /scripts/jd_speed_sign.js >> /scripts/logs/jd_speed_sign.log 2>&1
 # 京喜财富岛
 1 * * * * node /scripts/jd_cfd.js >> /scripts/logs/jd_cfd.log 2>&1
 # 京喜财富岛合成月饼
@@ -115,7 +115,7 @@
 # 京喜财富岛热气球
 30 * * * * node /scripts/jd_cfd_loop.js >> /scripts/logs/jd_cfd_loop.log 2>&1
 # 京东健康社区
-20 2,7,22 * * * node /scripts/jd_health.js >> /scripts/logs/jd_health.log 2>&1
+20 2,7,16,22 * * * node /scripts/jd_health.js >> /scripts/logs/jd_health.log 2>&1
 # 京东健康社区收集健康能量
 5-45/20 * * * * node /scripts/jd_health_collect.js >> /scripts/logs/jd_health_collect.log 2>&1
 # 幸运大转盘
@@ -172,7 +172,7 @@
 # 直播间抽奖(全局)
 5 12 * * 6 node /scripts/jd_live_lottery_social.js >> /scripts/logs/jd_live_lottery_social.log 2>&1
 # 宠汪汪积分兑换有就换版
-58 7,15,23 * * * node /scripts/jd_joy_reward_Mod.js >> /scripts/logs/jd_joy_reward_Mod.log 2>&1
+59 7,15,23 * * * node /scripts/jd_joy_reward_Mod.js >> /scripts/logs/jd_joy_reward_Mod.log 2>&1
 # 京喜购物返红包助力
 4 0-23/6 * * * node /scripts/jd_jx_cashback.js >> /scripts/logs/jd_jx_cashback.log 2>&1
 
@@ -199,4 +199,4 @@
 # 手机狂欢城助力
 10 0,8 * * * node /scripts/jd_carnivalcity_help.js >> /scripts/logs/jd_carnivalcity_help.log 2>&1
 # 电竞预言家
-45 7,14,16* * * node /scripts/jd_djyyj.js >> /scripts/logs/jd_djyyj.log 2>&1
+45 7,14,16 * * * node /scripts/jd_djyyj.js >> /scripts/logs/jd_djyyj.log 2>&1
