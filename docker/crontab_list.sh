@@ -202,3 +202,5 @@
 # 45 7,14,16 * * * node /scripts/jd_djyyj.js >> /scripts/logs/jd_djyyj.log 2>&1
 #集卡
 10 7,21 * * * node /scripts/jd_jika.js >> /scripts/logs/jd_jika.log 2>&1
+# 签到免单
+18 8,12,20 * * * node /scripts/jd_speed_signfree.js >> /scripts/logs/jd_speed_signfree.log 2>&1
