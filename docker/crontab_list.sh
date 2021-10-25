@@ -15,7 +15,7 @@
 # 酷跑零食街
 18 7,12,20 * * * node /scripts/jd_foodRunning.js >> /scripts/logs/jd_foodRunning.log 2>&1
 # 京喜领88元红包
-11 0,7,15 * * * node /scripts/jd_jxlhb.js >> /scripts/logs/jd_jxlhb.log 2>&1
+4 3,13,21 * * * node /scripts/jd_jxlhb.js >> /scripts/logs/jd_jxlhb.log 2>&1
 # 众筹许愿池
 20 0,2,19 * * * node /scripts/jd_wish.js >> /scripts/logs/jd_wish.log 2>&1
 # 内容鉴赏官
