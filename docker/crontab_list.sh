@@ -208,3 +208,13 @@
 10 1,6,8 25-31,1-11 10,11 * node /scripts/jd_superbox.js >> /scripts/logs/jd_superbox.log 2>&1
 # 潮玩儿制躁团
 20 11,16 1-2,25-31 10,11 * node /scripts/jd_zzt.js >> /scripts/logs/jd_zzt.log 2>&1
+# 省钱大赢家之翻翻乐
+20 0,6-23 * * * node /scripts/jd_big_winner.js >> /scripts/logs/jd_big_winner.log 2>&1
+#发财大赢家
+1 1,18 * * * node /scripts/jd_fc.js >> /scripts/logs/jd_fc.log 2>&1
+#发财大赢家助力
+1 1,18 * * * node /scripts/jd_fcdyj_help.js >> /scripts/logs/jd_fcdyj_help.log 2>&1
+#发财大赢家微信助力-快速
+17 0,5 * * * node /scripts/jd_dyj_help_wx.js >> /scripts/logs/jd_dyj_help_wx.log 2>&1
+#发财大赢家助力-快速
+11 0,5 * * * node /scripts/jd_dyj_help.js >> /scripts/logs/jd_dyj_help.log 2>&1
