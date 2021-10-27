@@ -138,7 +138,7 @@
 #半点京豆雨
 #30 16-23/1 * * * node /scripts/jd_half_redrain.js >> /scripts/logs/jd_half_redrain.log 2>&1
 #店铺签到
-0 0 * * * node /scripts/jd_shop_sign.js >> /scripts/logs/jd_shop_sign.log 2>&1
+#0 0 * * * node /scripts/jd_shop_sign.js >> /scripts/logs/jd_shop_sign.log 2>&1
 #粉丝互动
 #0 0 * * * node /scripts/jd_fan.js >> /scripts/logs/jd_fan.log 2>&1
 #超级直播间盲盒抽京豆
