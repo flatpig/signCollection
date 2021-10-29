@@ -27,7 +27,7 @@
 # 京东小魔方
 10 2,8,20 * * * node /scripts/jd_mf.js >> /scripts/logs/jd_mf.log 2>&1
 # 攒金币 赢大礼
-22 0,8,21 * * * node /scripts/jd_GoldcoinToGift.js >> /scripts/logs/jd_GoldcoinToGift.log 2>&1
+#22 0,8,21 * * * node /scripts/jd_GoldcoinToGift.js >> /scripts/logs/jd_GoldcoinToGift.log 2>&1
 # 城城分现金
 #0 0-23/1 * * * node /scripts/jd_city.js >> /scripts/logs/jd_city.log 2>&1
 
@@ -206,7 +206,5 @@
 18 8,12,20 * * * node /scripts/jd_speed_signfree.js >> /scripts/logs/jd_speed_signfree.log 2>&1
 # 京东超级盒子
 10 1,6,8 25-31,1-11 10,11 * node /scripts/jd_superbox.js >> /scripts/logs/jd_superbox.log 2>&1
-# 潮玩儿制躁团
-20 11,16 1-2,25-31 10,11 * node /scripts/jd_zzt.js >> /scripts/logs/jd_zzt.log 2>&1
 # 省钱大赢家之翻翻乐
 20 0,6-23 * * * node /scripts/jd_big_winner.js >> /scripts/logs/jd_big_winner.log 2>&1
