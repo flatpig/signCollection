@@ -193,13 +193,13 @@
 # 选品官
 23 9,19 * * * node /scripts/jd_selectionOfficer.js >> /scripts/logs/jd_selectionOfficer.log 2>&1
 # 跳跳乐瓜分京豆
-1 0,11,21 * * * node /scripts/jd_jump.js >> /scripts/logs/jd_jump.log 2>&1
+# 1 0,11,21 * * * node /scripts/jd_jump.js >> /scripts/logs/jd_jump.log 2>&1
 # 手机狂欢城
 0 0,12,18,21 * * * node /scripts/jd_carnivalcity.js >> /scripts/logs/jd_carnivalcity.log 2>&1
 # 手机狂欢城助力
 10 0,8 * * * node /scripts/jd_carnivalcity_help.js >> /scripts/logs/jd_carnivalcity_help.log 2>&1
 # 电竞预言家
-# 45 7,14,16 * * * node /scripts/jd_djyyj.js >> /scripts/logs/jd_djyyj.log 2>&1
+45 7,14,16 * * * node /scripts/jd_djyyj.js >> /scripts/logs/jd_djyyj.log 2>&1
 #集卡
 10 7,21 * * * node /scripts/jd_jika.js >> /scripts/logs/jd_jika.log 2>&1
 # 签到免单
