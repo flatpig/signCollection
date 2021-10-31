@@ -1,6 +1,6 @@
 /*
 活动入口：首页 -> 领券 -> 集卡赢大奖
-cron 10 7,21 * * * jd_jika.js
+cron 10 7,18 * * * jd_jika.js
  */
 const $ = new Env('集魔力卡召唤大奖');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -20,6 +20,8 @@ if ($.isNode()) {
         ...$.toObj($.getdata("CookiesJD") || "[]").map((item) => item.cookie)].filter((item) => !!item);
 }
 !(async () => {
+	console.log('部分账号会提示“非法请求”')
+	console.log('活动入口：首页 -> 领券 -> 集卡赢大奖')
     if (!cookiesArr[0]) {
         $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
         return;
