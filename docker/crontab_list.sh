@@ -208,3 +208,5 @@
 10 1,6,8 25-31,1-11 10,11 * node /scripts/jd_superbox.js >> /scripts/logs/jd_superbox.log 2>&1
 # 省钱大赢家之翻翻乐
 20 0,6-23 * * * node /scripts/jd_big_winner.js >> /scripts/logs/jd_big_winner.log 2>&1
+# 双十一红包
+0 0,12,20,21,22 node /scripts/jd_red.js >> /scripts/logs/jd_red.log 2>&1
