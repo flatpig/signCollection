@@ -1,10 +1,11 @@
 /*
 双11特务
 APP首页下滑,任务，互助
-cron 10 9,13,16,19 2-8 11 * https://raw.githubusercontent.com/star261/jd/main/scripts/jd_superBrand.js
+cron 10 9,13,16,19,20 2-8 11 * https://raw.githubusercontent.com/star261/jd/main/scripts/jd_superBrand.js
 * */
 const $ = new Env('双11特务');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
+const notify = $.isNode() ? require('./sendNotify') : '';
 let cookiesArr = [];
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach(item => {
@@ -100,7 +101,7 @@ function getShareCode(name) {
   return new Promise(resolve => {
     $.get(
       {
-        url: 'https://gitee.com/KingRan521/JD-Scripts/raw/master/shareCodes/' + name,
+        url: 'https://raw.fastgit.org/zero205/updateTeam/main/shareCodes/' + name,
         headers: {
           'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/87.0.4280.88',
         },
@@ -111,7 +112,7 @@ function getShareCode(name) {
             console.log(`${JSON.stringify(err)}`);
             console.log(`${$.name} API请求失败，请检查网路重试`);
           } else {
-            console.log(`优先账号内部互助`);
+            console.log(`优先账号内部互助，有剩余助力次数再帮【zero205】助力`);
             $.shareCode = JSON.parse(data);
           }
         } catch (e) {
@@ -187,7 +188,34 @@ async function main(cookie) {
       console.log(`执行结果：${JSON.stringify(doInfo)}`);
       await $.wait(3000);
     }
-
+    if (oneTask.assignmentType === 3) {
+      console.log(`任务：${oneTask.assignmentName},去执行,请稍稍`);
+      let itemId = oneTask.ext.followShop[0].itemId || '';
+      if (!itemId) {
+        console.log(`任务：${oneTask.assignmentName},信息异常`);
+      }
+      let doInfo = await takeRequest(
+        cookie,
+        'superBrandDoTask',
+        `{"source":"card","activityId":${activityId},"encryptProjectId":"${encryptProjectId}","encryptAssignmentId":"${oneTask.encryptAssignmentId}","assignmentType":${oneTask.assignmentType},"itemId":"${itemId}","actionType":0}`,
+      );
+      console.log(`执行结果：${JSON.stringify(doInfo)}`);
+      await $.wait(3000);
+    }
+    if (oneTask.assignmentType === 7) {
+      console.log(`任务：${oneTask.assignmentName},去执行,请稍稍`);
+      let itemId = oneTask.ext.brandMemberList[0].itemId || '';
+      if (!itemId) {
+        console.log(`任务：${oneTask.assignmentName},信息异常`);
+      }
+      let doInfo = await takeRequest(
+        cookie,
+        'superBrandDoTask',
+        `{"source":"card","activityId":${activityId},"encryptProjectId":"${encryptProjectId}","encryptAssignmentId":"${oneTask.encryptAssignmentId}","assignmentType":${oneTask.assignmentType},"itemId":"${itemId}","actionType":0}`,
+      );
+      console.log(`执行结果：${JSON.stringify(doInfo)}`);
+      await $.wait(3000);
+    }
     if (oneTask.assignmentType === 5) {
       let signList = oneTask.ext.sign2 || [];
       if (signList.length === 0) {
@@ -250,7 +278,7 @@ async function takeRequest(cookie, functionId, bodyInfo) {
         }
       } catch (e) {
         console.log(data);
-        $.logErr(e, resp);
+        //$.logErr(e, resp)
       } finally {
         resolve(data.data || {});
       }
