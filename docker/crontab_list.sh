@@ -194,3 +194,5 @@
 # 0 2 * * * node /scripts/jd_jingsubang.js >> /scripts/logs/jd_jingsubang.log 2>&1
 # 牛牛福利
 1 0,9,19,23 * * * node /scripts/jd_nnfls.js >> /scripts/logs/jd_nnfls.log 2>&1
+# 双十一特务
+10 9,13,16,19,20 2-8 11 node /scripts/jd_superBrand.js >> /scripts/logs/jd_superBrand.log 2>&1
