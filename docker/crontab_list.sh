@@ -191,7 +191,7 @@
 # 京喜工厂商品
 10 10 * * * node /scripts/jd_jxgckc.js >> /scripts/logs/jd_jxgckc.log 2>&1
 # 手机竞猜
-# 0 2 * * * node /scripts/jd_jingsubang.js >> /scripts/logs/jd_jingsubang.log 2>&1
+0 2 * * * node /scripts/jd_jingsubang.js >> /scripts/logs/jd_jingsubang.log 2>&1
 # 牛牛福利
 1 0,9,19,23 * * * node /scripts/jd_nnfls.js >> /scripts/logs/jd_nnfls.log 2>&1
 # 双十一特务
