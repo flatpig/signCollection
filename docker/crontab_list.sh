@@ -164,8 +164,6 @@
 #东东超市限时抢京豆：入口-主页-京东超市-右侧
 11 0,9 * * * node /scripts/jd_fission.js >> /scripts/logs/jd_fission.log 2>&1
 
-#幸运扭蛋
-24 9 * 10-11 * node /scripts/jd_lucky_egg.js >> /scripts/logs/jd_lucky_egg.log 2>&1
 # 预售福利机
 4 0,2,15 * * * node /scripts/jd_ys.js >> /scripts/logs/jd_ys.log 2>&1
 # 京东图形签到
