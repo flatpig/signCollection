@@ -188,8 +188,6 @@
 0 0,12,20,21,22 node /scripts/jd_red.js >> /scripts/logs/jd_red.log 2>&1
 # 跳跳乐
 1 0,11,21 * * * node /scripts/jd_jump.js >> /scripts/logs/jd_jump.log 2>&1
-# 京喜工厂商品
-10 10 * * * node /scripts/jd_jxgckc.js >> /scripts/logs/jd_jxgckc.log 2>&1
 # 手机竞猜
 0 2 * * * node /scripts/jd_jingsubang.js >> /scripts/logs/jd_jingsubang.log 2>&1
 # 牛牛福利
