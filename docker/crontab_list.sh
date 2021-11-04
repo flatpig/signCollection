@@ -175,3 +175,7 @@
 10 9,13,16,19,20 2-8 11 node /scripts/jd_superBrand.js >> /scripts/logs/jd_superBrand.log 2>&1
 # 星店长
 5 7,12,20 * * * node /scripts/jd_star.js >> /scripts/logs/jd_star.log 2>&1
+# 星推官
+22 3,4 * * * node /scripts/jd_xtg.js >> /scripts/logs/jd_xtg.log 2>&1
+# 电器盲盒
+0 8 1-20 * * node /scripts/jd_dqmh.js >> /scripts/logs/jd_dqmh.log 2>&1
