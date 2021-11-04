@@ -164,7 +164,7 @@
 # 省钱大赢家之翻翻乐
 20 * * * *  node /scripts/jd_big_winner.js >> /scripts/logs/jd_big_winner.log 2>&1
 # 双十一红包
-0 0,12,20,21,22 node /scripts/jd_red.js >> /scripts/logs/jd_red.log 2>&1
+0 0,12,20 * * * node /scripts/jd_red.js >> /scripts/logs/jd_red.log 2>&1
 # 跳跳乐
 #1 0,11,21 * * * node /scripts/jd_jump.js >> /scripts/logs/jd_jump.log 2>&1
 # 手机竞猜
