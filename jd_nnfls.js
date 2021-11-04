@@ -46,9 +46,9 @@ if ($.isNode()) {
     res = await UserSignNew();
     await drawUserTask();
   }
-  // const author = Math.random() > 0.5 ? 'zero205' : 'zxx'
-  const author = 'zero205';
-  // await getShareCode('nnfls.json',author,3,true)
+  //   shareCodes = shareCodes.filter(code => code);
+  //   const author = Math.random() > 0.5 ? 'zero205' : 'ZXX2021';
+  //   await getShareCode('nnfls.json', author, 3, true);
   shareCodes = [...new Set([...shareCodes])];
   if (shareCodes.length > 0) {
     console.log(`\n开始互助\n`);
@@ -81,36 +81,36 @@ if ($.isNode()) {
     $.done();
   });
 
-// function getShareCode(name,author = 'zero205',num = -1,shuffle=false) {
-//   return new Promise(resolve => {
-//     $.get({
-//       url: `https://raw.fastgit.org/${author}/updateTeam/main/shareCodes/${name}`,
-//       headers: {
-//         "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/87.0.4280.88"
-//       }
-//     }, async (err, resp, data) => {
-//       try {
-//         if (err) {
-//           console.log(`${JSON.stringify(err)}`);
-//           console.log(`${$.name} API请求失败，请检查网路重试`);
-//         } else {
-//           console.log(`优先账号内部互助，有剩余助力次数再帮作者助力`);
-//           $.shareCode = JSON.parse(data) || []
-//           if (shuffle) {
-//             $.shareCode = $.shareCode.sort(() => 0.5 - Math.random())
-//           }
-//           if (num != -1) {
-//             $.shareCode = $.shareCode.slice(0,num)
-//           }
-//         }
-//       } catch (e) {
-//         $.logErr(e, resp)
-//       } finally {
-//         resolve();
-//       }
-//     })
-//   })
-// }
+//  function getShareCode(name,author = 'zero205',num = -1,shuffle=false) {
+//    return new Promise(resolve => {
+//      $.get({
+//        url: `https://raw.fastgit.org/${author}/updateTeam/main/shareCodes/${name}`,
+//        headers: {
+//          "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/87.0.4280.88"
+//        }
+//      }, async (err, resp, data) => {
+//        try {
+//          if (err) {
+//            console.log(`${JSON.stringify(err)}`);
+//            console.log(`${$.name} API请求失败，请检查网路重试`);
+//          } else {
+//            console.log(`优先账号内部互助，有剩余助力次数再帮作者助力`);
+//            $.shareCode = JSON.parse(data) || []
+//            if (shuffle) {
+//              $.shareCode = $.shareCode.sort(() => 0.5 - Math.random())
+//            }
+//            if (num != -1) {
+//              $.shareCode = $.shareCode.slice(0,num)
+//            }
+//          }
+//        } catch (e) {
+//          $.logErr(e, resp)
+//        } finally {
+//          resolve();
+//        }
+//      })
+//    })
+//  }
 
 async function help(sharecode) {
   console.log(`${$.UserName} 去助力 ${sharecode}`);
@@ -155,15 +155,15 @@ async function drawUserTask() {
     }
   }
 
-  res = await api('active/LuckyTwistUserInfo', 'sceneval', {});
-  let surplusTimes = res.data.surplusTimes;
-  console.log('剩余抽奖次数', surplusTimes);
-  for (let j = 0; j < surplusTimes && coin >= 10; j++) {
-    res = await api('active/LuckyTwistDraw', 'active,activedesc,sceneval', { active: 'rwjs_fk1111', activedesc: encodeURIComponent('幸运扭蛋机抽奖') });
-    console.log('抽奖成功', res.data.prize[0].prizename);
-    coin -= 10;
-    await $.wait(5000);
-  }
+  //  res = await api('active/LuckyTwistUserInfo', 'sceneval', {})
+  //  let surplusTimes = res.data.surplusTimes
+  //  console.log('剩余抽奖次数', surplusTimes)
+  //  for (let j = 0; j < surplusTimes && coin >= 10; j++) {
+  //      res = await api('active/LuckyTwistDraw', 'active,activedesc,sceneval', { active: 'rwjs_fk1111', activedesc: encodeURIComponent('幸运扭蛋机抽奖') })
+  //      console.log('抽奖成功', res.data.prize[0].prizename)
+  //      coin -= 10
+  //      await $.wait(5000)
+  //  }
   await $.wait(2000);
 }
 
