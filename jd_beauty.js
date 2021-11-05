@@ -44,7 +44,7 @@ const JD_API_HOST = 'https://api.m.jd.com/client.action';
   }
   helpInfo = [];
   for (let i = 0; i < cookiesArr.length; i++) {
-    if (i === 7 || i === 8) break;
+    if (i === 7 || i === 8) continue;
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
       $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]);

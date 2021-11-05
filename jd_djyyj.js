@@ -38,7 +38,7 @@ let shareList = [];
   }
   let allShareList = [];
   for (let i = 0; i < cookiesArr.length; i++) {
-    if (i === 7 || i === 8) break;
+    if (i === 7 || i === 8) continue;
     let cookie = cookiesArr[i];
     let userName = decodeURIComponent(cookie.match(/pt_pin=(.+?);/) && cookie.match(/pt_pin=(.+?);/)[1]);
     for (let j = 0; j < shareList.length; j++) {
@@ -49,7 +49,7 @@ let shareList = [];
     }
   }
   for (let i = 0; i < cookiesArr.length; i++) {
-    if (i === 7 || i === 8) break;
+    if (i === 7 || i === 8) continue;
     let cookie = cookiesArr[i];
     let userName = decodeURIComponent(cookie.match(/pt_pin=(.+?);/) && cookie.match(/pt_pin=(.+?);/)[1]);
     let canHelp = true;

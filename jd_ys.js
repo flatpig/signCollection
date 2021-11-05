@@ -49,7 +49,7 @@ let allMessage = '';
     return;
   }
   for (let i = 0; i < cookiesArr.length; i++) {
-    if (i === 7 || i === 8) break;
+    if (i === 7 || i === 8) continue;
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
       $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]);
@@ -87,7 +87,7 @@ let allMessage = '';
   }
   $.shareCodes = [...new Set([...$.shareCodes, ...(res || [])])];
   for (let i = 0; i < cookiesArr.length; i++) {
-    if (i === 7 || i === 8) break;
+    if (i === 7 || i === 8) continue;
     cookie = cookiesArr[i];
     $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]);
     $.canHelp = true;
