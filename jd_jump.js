@@ -1,79 +1,81 @@
 /*
+author:star
 跳跳乐瓜分京豆脚本
 更新时间：2021-05-21
 活动入口：来客有礼(微信小程序)=>跳跳乐或京东APP=》首页=》母婴馆=》底部中间
-注：脚本好像还是会加商品到购物车，慎使用
+注：默认不做添加物品至购物车任务，守护京东APP最后一片净土。
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 ================QuantumultX==================
 [task_local]
 #跳跳乐瓜分京豆
-1 0,11,21 * * * jd_jump.js, tag=跳跳乐瓜分京豆, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+1 0,11,21 * * * https://gitee.com/lxk0301/jd_scripts/raw/master/jd_jump.js, tag=跳跳乐瓜分京豆, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 ===================Loon==============
 [Script]
-cron "1 0,11,21 * * *" script-path=jd_jump.js, tag=跳跳乐瓜分京豆
+cron "1 0,11,21 * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_jump.js, tag=跳跳乐瓜分京豆
 ===============Surge===============
 [Script]
-跳跳乐瓜分京豆 = type=cron,cronexp="1 0,11,21 * * *",wake-system=1,timeout=3600,script-path=jd_jump.js
+跳跳乐瓜分京豆 = type=cron,cronexp="1 0,11,21 * * *",wake-system=1,timeout=3600,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_jump.js
 ====================================小火箭=============================
-跳跳乐瓜分京豆 = type=cron,script-path=jd_jump.js, cronexpr="1 0,11,21 * * *", timeout=3600, enable=true
+跳跳乐瓜分京豆 = type=cron,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_jump.js, cronexpr="1 0,11,21 * * *", timeout=3600, enable=true
 */
 const $ = new Env('跳跳乐瓜分京豆');
 const notify = $.isNode() ? require('./sendNotify') : '';
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 // $.helpCodeList = [];
 //IOS等用户直接用NobyDa的jd cookie
-let cookiesArr = [],
-  cookie = '';
+let cookiesArr = [], cookie = '';
 if ($.isNode()) {
-  Object.keys(jdCookieNode).forEach(item => {
-    cookiesArr.push(jdCookieNode[item]);
-  });
+  Object.keys(jdCookieNode).forEach((item) => {
+    cookiesArr.push(jdCookieNode[item])
+  })
   if (process.env.JD_DEBUG && process.env.JD_DEBUG === 'false') console.log = () => {};
 } else {
-  cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...$.toObj($.getdata('CookiesJD') || '[]').map(item => item.cookie)].filter(item => !!item);
+  cookiesArr = [
+    $.getdata("CookieJD"),
+    $.getdata("CookieJD2"),
+    ...$.toObj($.getdata("CookiesJD") || "[]").map((item) => item.cookie)].filter((item) => !!item);
 }
 
 !(async () => {
   if (!cookiesArr[0]) {
-    $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', { 'open-url': 'https://bean.m.jd.com/bean/signIndex.action' });
+    $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
     return;
   }
-  console.log(`注：脚本好像还是会加商品到购物车，慎使用。\n`);
+  console.log(`注：脚本默认不做添加物品至购物车任务,请设置FS_LEVEL为car(加购)或card(开卡加购)。\n`);
   for (let i = 0; i < cookiesArr.length; i++) {
-    if (i === 7 || i === 8) continue;
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
-      $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]);
+      $.UserName = decodeURIComponent(cookie.match(/pt_pin=(.+?);/) && cookie.match(/pt_pin=(.+?);/)[1])
       $.index = i + 1;
       $.isLogin = true;
-      $.nickName = '';
+      $.nickName = $.UserName;
       await TotalBean();
       console.log(`\n*****开始【京东账号${$.index}】${$.nickName || $.UserName}*****\n`);
       if (!$.isLogin) {
-        $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, { 'open-url': 'https://bean.m.jd.com/bean/signIndex.action' });
+        $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
 
         if ($.isNode()) {
           await notify.sendNotify(`${$.name}cookie已失效 - ${$.UserName}`, `京东账号${$.index} ${$.UserName}\n请重新登录获取cookie`);
         }
-        continue;
+        continue
       }
-      await jump();
+      await jump()
     }
   }
 })()
-  .catch(e => {
-    $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '');
-  })
-  .finally(() => {
-    $.done();
-  });
+    .catch((e) => {
+      $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
+    })
+    .finally(() => {
+      $.done();
+    })
 
 async function jump() {
   $.nowTime = new Date().getTime() + new Date().getTimezoneOffset() * 60 * 1000 + 8 * 60 * 60 * 1000;
   $.jumpList = [];
   await getGameList();
   if ($.jumpList.length === 0) {
-    console.log(`获取活动列表失败，请等待下一期活动\n`);
+    console.log(`获取活动列表失败`);
     return;
   }
   await $.wait(1000);
@@ -112,8 +114,7 @@ async function jump() {
       break;
     } else if ($.oneJumpInfo.userInfo.userState === 'playing') {
       console.log(`开始执行活动：${$.jumpName}，活动时间：${new Date($.oneJumpInfo.jumpActivityDetail.startTime).toLocaleString()}至${new Date($.oneJumpInfo.jumpActivityDetail.endTime).toLocaleString()}`);
-    } else {
-      //complete
+    } else {//complete
       console.log(`异常`);
       continue;
     }
@@ -204,12 +205,12 @@ async function rewards() {
           }
         }
       } catch (e) {
-        $.logErr(e, resp);
+        $.logErr(e, resp)
       } finally {
         resolve();
       }
-    });
-  });
+    })
+  })
 }
 
 async function getReward() {
@@ -228,13 +229,14 @@ async function domission() {
   return new Promise(async resolve => {
     $.get(myRequest, (err, resp, data) => {
       try {
+
       } catch (e) {
-        $.logErr(e, resp);
+        $.logErr(e, resp)
       } finally {
         resolve();
       }
-    });
-  });
+    })
+  })
 }
 
 async function throwDice() {
@@ -250,12 +252,12 @@ async function throwDice() {
           console.log(`丢骰子结果：${$.gridType}`);
         }
       } catch (e) {
-        $.logErr(e, resp);
+        $.logErr(e, resp)
       } finally {
         resolve($.gridType);
       }
-    });
-  });
+    })
+  })
 }
 
 async function getBeanRewards() {
@@ -268,12 +270,12 @@ async function getBeanRewards() {
           $.rewardList = data.datas;
         }
       } catch (e) {
-        $.logErr(e, resp);
+        $.logErr(e, resp)
       } finally {
         resolve();
       }
-    });
-  });
+    })
+  })
 }
 
 //做任务
@@ -286,9 +288,9 @@ async function doTask() {
       continue;
     }
     if (oneTask.gridTask === 'add_cart' && oneTask.state === 'unfinish' && addFlag) {
-      if (oneTask.gridTask === 'add_cart') {
-        console.log(`不做：【${oneTask.content}】 任务`);
-        continue;
+      if (oneTask.gridTask === 'add_cart' && !['car','card'].includes(process.env.FS_LEVEL)) {
+        console.log(`不做：【${oneTask.content}】 任务`)
+        continue
       }
       console.log(`开始执行任务：${oneTask.content}`);
       let skuList = [];
@@ -315,12 +317,12 @@ async function addCart(skuList) {
           }
         }
       } catch (e) {
-        $.logErr(e, resp);
+        $.logErr(e, resp)
       } finally {
         resolve();
       }
-    });
-  });
+    })
+  })
 }
 
 //获取任务列表
@@ -336,12 +338,12 @@ async function getTaskList() {
           }
         }
       } catch (e) {
-        $.logErr(e, resp);
+        $.logErr(e, resp)
       } finally {
         resolve();
       }
-    });
-  });
+    })
+  })
 }
 
 async function receive() {
@@ -352,16 +354,16 @@ async function receive() {
         if (data) {
           data = JSON.parse(data);
           if (data.success === true) {
-            console.log(`瓜分成功`);
+            console.log(`瓜分成功`)
           }
         }
       } catch (e) {
-        $.logErr(e, resp);
+        $.logErr(e, resp)
       } finally {
         resolve();
       }
-    });
-  });
+    })
+  })
 }
 
 //获取活动信息
@@ -378,12 +380,12 @@ async function getOneJumpInfo() {
           }
         }
       } catch (e) {
-        $.logErr(e, resp);
+        $.logErr(e, resp)
       } finally {
         resolve();
       }
-    });
-  });
+    })
+  })
 }
 
 //获取活动列表
@@ -399,110 +401,93 @@ async function getGameList() {
           }
         }
       } catch (e) {
-        $.logErr(e, resp);
+        $.logErr(e, resp)
       } finally {
         resolve();
       }
-    });
-  });
+    })
+  })
 }
+
 
 function getGetRequest(type, body) {
   const url = `https://jdjoy.jd.com/jump/${type}?${body}`;
   const method = `GET`;
   const headers = {
-    Cookie: cookie,
-    Accept: `*/*`,
-    Connection: `keep-alive`,
-    Referer: `https://jdjoy.jd.com/dist/taro/index.html/`,
+    'Cookie': cookie,
+    'Accept': `*/*`,
+    'Connection': `keep-alive`,
+    'Referer': `https://jdjoy.jd.com/dist/taro/index.html/`,
     'Accept-Encoding': `gzip, deflate, br`,
-    Host: `jdjoy.jd.com`,
-    'User-Agent': $.isNode()
-      ? process.env.JD_USER_AGENT
-        ? process.env.JD_USER_AGENT
-        : require('./USER_AGENTS').USER_AGENT
-      : $.getdata('JDUA')
-      ? $.getdata('JDUA')
-      : 'jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1',
-    'Accept-Language': `zh-cn`,
+    'Host': `jdjoy.jd.com`,
+    "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
+    'Accept-Language': `zh-cn`
   };
-  return { url: url, method: method, headers: headers };
+  return {url: url, method: method, headers: headers};
 }
 
 function getPostRequest(type, body) {
   const url = `https://jdjoy.jd.com/jump/${type}`;
   const method = `POST`;
   const headers = {
-    Accept: `*/*`,
-    Origin: `https://jdjoy.jd.com`,
+    'Accept': `*/*`,
+    'Origin': `https://jdjoy.jd.com`,
     'Accept-Encoding': `gzip, deflate, br`,
-    Cookie: cookie,
+    'Cookie': cookie,
     'Content-Type': `application/json`,
-    Host: `jdjoy.jd.com`,
-    Connection: `keep-alive`,
-    'User-Agent': $.isNode()
-      ? process.env.JD_USER_AGENT
-        ? process.env.JD_USER_AGENT
-        : require('./USER_AGENTS').USER_AGENT
-      : $.getdata('JDUA')
-      ? $.getdata('JDUA')
-      : 'jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1',
-    Referer: `https://jdjoy.jd.com/dist/taro/index.html/`,
-    'Accept-Language': `zh-cn`,
+    'Host': `jdjoy.jd.com`,
+    'Connection': `keep-alive`,
+    "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
+    'Referer': `https://jdjoy.jd.com/dist/taro/index.html/`,
+    'Accept-Language': `zh-cn`
   };
-  return (myRequest = { url: url, method: method, headers: headers, body: body });
+  return myRequest = {url: url, method: method, headers: headers, body: body};
 }
 
 function sortNumber(a, b) {
-  return a - b;
+  return a - b
 }
 
 function TotalBean() {
   return new Promise(async resolve => {
     const options = {
-      url: 'https://wq.jd.com/user_new/info/GetJDUserInfoUnion?sceneval=2',
+      url: "https://me-api.jd.com/user_new/info/GetJDUserInfoUnion",
       headers: {
-        Host: 'wq.jd.com',
-        Accept: '*/*',
-        Connection: 'keep-alive',
+        Host: "me-api.jd.com",
+        Accept: "*/*",
+        Connection: "keep-alive",
         Cookie: cookie,
-        'User-Agent': $.isNode()
-          ? process.env.JD_USER_AGENT
-            ? process.env.JD_USER_AGENT
-            : require('./USER_AGENTS').USER_AGENT
-          : $.getdata('JDUA')
-          ? $.getdata('JDUA')
-          : 'jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1',
-        'Accept-Language': 'zh-cn',
-        Referer: 'https://home.m.jd.com/myJd/newhome.action?sceneval=2&ufc=&',
-        'Accept-Encoding': 'gzip, deflate, br',
-      },
-    };
+        "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
+        "Accept-Language": "zh-cn",
+        "Referer": "https://home.m.jd.com/myJd/newhome.action?sceneval=2&ufc=&",
+        "Accept-Encoding": "gzip, deflate, br"
+      }
+    }
     $.get(options, (err, resp, data) => {
       try {
         if (err) {
-          $.logErr(err);
+          $.logErr(err)
         } else {
           if (data) {
             data = JSON.parse(data);
-            if (data['retcode'] === 1001) {
+            if (data['retcode'] === "1001") {
               $.isLogin = false; //cookie过期
               return;
             }
-            if (data['retcode'] === 0 && data.data && data.data.hasOwnProperty('userInfo')) {
+            if (data['retcode'] === "0" && data.data && data.data.hasOwnProperty("userInfo")) {
               $.nickName = data.data.userInfo.baseInfo.nickname;
             }
           } else {
-            console.log('京东服务器返回空数据');
+            $.log('京东服务器返回空数据');
           }
         }
       } catch (e) {
-        $.logErr(e);
+        $.logErr(e)
       } finally {
         resolve();
       }
-    });
-  });
+    })
+  })
 }
 
 // prettier-ignore
