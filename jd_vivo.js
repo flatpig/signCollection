@@ -61,7 +61,6 @@ $.shareUuid = '';
   }
   let activityList = [{ id: 'dz2110100000406501', endTime: '1638287999000' }];
   for (let i = 0; i < cookiesArr.length; i++) {
-    if (i === 7 || i === 8) continue;
     let index = i + 1;
     cookie = cookiesArr[i];
     userName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]);
