@@ -166,7 +166,7 @@
 # 双十一红包
 0 0,12,20 * * * node /scripts/jd_red.js >> /scripts/logs/jd_red.log 2>&1
 # 跳跳乐
-#1 0,11,21 * * * node /scripts/jd_jump.js >> /scripts/logs/jd_jump.log 2>&1
+1 0,11,21 * * * node /scripts/jd_jump.js >> /scripts/logs/jd_jump.log 2>&1
 # 手机竞猜
 0 2 * * * node /scripts/jd_jingsubang.js >> /scripts/logs/jd_jingsubang.log 2>&1
 # 牛牛福利
