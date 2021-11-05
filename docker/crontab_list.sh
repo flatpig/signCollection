@@ -179,3 +179,5 @@
 22 3,4 * * * node /scripts/jd_xtg.js >> /scripts/logs/jd_xtg.log 2>&1
 # 电器盲盒
 0 7 1-20 * * node /scripts/jd_dqmh.js >> /scripts/logs/jd_dqmh.log 2>&1
+# vivo
+10 2,9,17 * * * node /scripts/jd_vivo.js >> /scripts/logs/jd_vivo.log 2>&1
