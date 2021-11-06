@@ -13,17 +13,17 @@ d、 30000名之外，0京豆
 ===================quantumultx================
 [task_local]
 #京东手机狂欢城
-0 0-18/6 * * * https://raw.githubusercontent.com/KingRan/JDJB/main/jd_carnivalcity.js, tag=京东手机狂欢城, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+0 0-18/6 * * * https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_carnivalcity.js, tag=京东手机狂欢城, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 
 =====================Loon================
 [Script]
-cron "0 0-18/6 * * *" script-path=https://raw.githubusercontent.com/KingRan/JDJB/main/jd_carnivalcity.js, tag=京东手机狂欢城
+cron "0 0-18/6 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_carnivalcity.js, tag=京东手机狂欢城
 
 ====================Surge================
-京东手机狂欢城 = type=cron,cronexp=0 0-18/6 * * *,wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/KingRan/JDJB/main/jd_carnivalcity.js
+京东手机狂欢城 = type=cron,cronexp=0 0-18/6 * * *,wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_carnivalcity.js
 
 ============小火箭=========
-京东手机狂欢城 = type=cron,script-path=https://raw.githubusercontent.com/KingRan/JDJB/main/jd_carnivalcity.js, cronexpr="0 0-18/6 * * *", timeout=3600, enable=true
+京东手机狂欢城 = type=cron,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_carnivalcity.js, cronexpr="0 0-18/6 * * *", timeout=3600, enable=true
 */
 const $ = new Env('京东手机狂欢城');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -142,7 +142,7 @@ function headInfo() {
                 if (data.data.taskType === "13" || data.data.taskType === "15") {
                   console.log(`开始 【顶部】浏览任务,需等待6秒`)
                   await doBrowseHead(data.data.taskIndex, data.data.taskId, data.data.taskType)
-                } else if (data.data.taskType === "14") {
+                } else if (data.data.taskType === "14" && ["car","card"].includes(process.env.FS_LEVEL)) {
                   console.log(`开始 【顶部】加购任务`)
                   await getHeadJoinPrize(data.data.taskId, data.data.taskIndex)
                 }
