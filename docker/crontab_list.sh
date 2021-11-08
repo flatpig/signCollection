@@ -184,4 +184,4 @@
 # 双11环游记大富翁
 0 2 1-11 11 * node /scripts/jd_travel_shop.js >> /scripts/logs/jd_travel_shop.log 2>&1
 #
-0 0,12,20 * * * node /scripts/jd_qjd.js >> /scripts/logs/jd_qjd.log 2>&1
+#0 0,12,20 * * * node /scripts/jd_qjd.js >> /scripts/logs/jd_qjd.log 2>&1
