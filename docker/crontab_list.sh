@@ -94,7 +94,7 @@
 # 京东极速版签到+赚现金任务
 0 7,13,15,22 * * * node /scripts/jd_speed_sign.js >> /scripts/logs/jd_speed_sign.log 2>&1
 # 京喜财富岛
-0 0,6-23 * * * node /scripts/jd_cfd.js >> /scripts/logs/jd_cfd.log 2>&1
+1 0,6-23 * * * node /scripts/jd_cfd.js >> /scripts/logs/jd_cfd.log 2>&1
 # 京喜财富岛合成月饼
 5 * * * * node /scripts/jd_cfd_mooncake.js >> /scripts/logs/jd_cfd_mooncake.log 2>&1
 # 京喜财富岛热气球
@@ -153,8 +153,6 @@
 #10 0,8 * * * node /scripts/jd_carnivalcity_help.js >> /scripts/logs/jd_carnivalcity_help.log 2>&1
 # 签到免单
 18 8,12,20 * * * node /scripts/jd_speed_signfree.js >> /scripts/logs/jd_speed_signfree.log 2>&1
-# 京东超级盒子
-10 1,6,8 25-31,1-11 10,11 * node /scripts/jd_superbox.js >> /scripts/logs/jd_superbox.log 2>&1
 # 省钱大赢家之翻翻乐
 20 * * * *  node /scripts/jd_big_winner.js >> /scripts/logs/jd_big_winner.log 2>&1
 # 跳跳乐
@@ -162,7 +160,7 @@
 # 牛牛福利
 1 0,9,19,23 * * * node /scripts/jd_nnfls.js >> /scripts/logs/jd_nnfls.log 2>&1
 # 整点京豆雨
-3 0-23/1 * * * node /scripts/jd_super_redrain.js >> /scripts/logs/jd_super_redrain.log 2>&1
+#3 0-23/1 * * * node /scripts/jd_super_redrain.js >> /scripts/logs/jd_super_redrain.log 2>&1
 # 星店长
 #5 7,12,20 * * * node /scripts/jd_star.js >> /scripts/logs/jd_star.log 2>&1
 # 东东超市抢京豆
