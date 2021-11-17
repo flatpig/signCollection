@@ -164,7 +164,7 @@
 # 京东饭粒
 40 0,17 * * * node /scripts/jd_fanli.js >> /scripts/logs/jd_fanli.log 2>&1
 # 电器盲盒
-0 7 1-20 * * node /scripts/jd_dqmh.js >> /scripts/logs/jd_dqmh.log 2>&1
+#0 7 1-20 * * node /scripts/jd_dqmh.js >> /scripts/logs/jd_dqmh.log 2>&1
 # vivo
 10 2,9,17 * * * node /scripts/jd_vivo.js >> /scripts/logs/jd_vivo.log 2>&1
 # 赚京豆(微信小程序)
