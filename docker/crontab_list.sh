@@ -158,11 +158,11 @@
 # 跳跳乐
 #1 0,11,21 * * * node /scripts/jd_jump.js >> /scripts/logs/jd_jump.log 2>&1
 # 牛牛福利
-1 0,9,19,23 * * * node /scripts/jd_nnfls.js >> /scripts/logs/jd_nnfls.log 2>&1
+1 0,19,23 * * * node /scripts/jd_nnfls.js >> /scripts/logs/jd_nnfls.log 2>&1
 # 东东超市抢京豆
 #47 0,9 * * * node /scripts/jd_fission.js >> /scripts/logs/jd_fission.log 2>&1
 # 京东饭粒
-40 0,17 * * * node /scripts/jd_fanli.js >> /scripts/logs/jd_fanli.log 2>&1
+40 0,9,17 * * * node /scripts/jd_fanli.js >> /scripts/logs/jd_fanli.log 2>&1
 # 电器盲盒
 #0 7 1-20 * * node /scripts/jd_dqmh.js >> /scripts/logs/jd_dqmh.log 2>&1
 # vivo
