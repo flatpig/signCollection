@@ -152,4 +152,4 @@
 # 赚京豆(微信小程序)
 0-59/20 0,1 * * * node /scripts/jd_syj.js >> /scripts/logs/jd_syj.log 2>&1
 # 特务Z
-23 8,11 * * * node /scripts/jd_superBrand.js >> /scripts/logs/jd_superBrand.log 2>&1
+23 8,20 * * * node /scripts/jd_superBrand.js >> /scripts/logs/jd_superBrand.log 2>&1
