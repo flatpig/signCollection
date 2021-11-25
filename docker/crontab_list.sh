@@ -155,7 +155,7 @@
 # 财富岛合成生鲜
 45 * * * * node /scripts/jd_cfd_fresh.js >> /scripts/logs/jd_cfd_fresh.log 2>&1
 # 财富岛合成生鲜兑换
-0 12 * * * node /scripts/jd_cfd_fresh_exchange.js >> /scripts/logs/jd_cfd_fresh_exchange.log 2>&1
+#0 12 * * * node /scripts/jd_cfd_fresh_exchange.js >> /scripts/logs/jd_cfd_fresh_exchange.log 2>&1
 # 京东答题
 #22 6,18 * * * node /scripts/jd_jddt.js >> /scripts/logs/jd_jddt.log 2>&1
 # 农场集勋章
