@@ -162,3 +162,10 @@
 30 7,16 * * * node /scripts/jd_medal.js >> /scripts/logs/jd_medal.log 2>&1
 # 京东金榜
 13 6 * * * node /scripts/jd_gold_sign.js >> /scripts/logs/jd_gold_sign.log 2>&1
+# 签到翻拍
+30 8 * * * node /scripts/jd_sign_graphics1.js >> /scripts/logs/jd_sign_graphics1.log 2>&1
+# 美妆馆兑换
+40 8,13,19 * * * node /scripts/jd_beauty_ex.js >> /scripts/logs/jd_beauty_ex.log 2>&1
+# 财富岛兑换
+0 0 16,19 * * * node /scripts/jx_cfd_pearl_exchange5.js >> /scripts/logs/jx_cfd_pearl_exchange5.log 2>&1
+0 0 16,19 * * * node /scripts/jx_cfd_pearl_exchange1.js >> /scripts/logs/jx_cfd_pearl_exchange1.log 2>&1
