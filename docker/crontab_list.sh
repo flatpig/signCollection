@@ -167,5 +167,5 @@
 # 美妆馆兑换
 40 8,13,19 * * * node /scripts/jd_beauty_ex.js >> /scripts/logs/jd_beauty_ex.log 2>&1
 # 财富岛兑换
-0 0 16,19 * * * node /scripts/jx_cfd_pearl_exchange5.js >> /scripts/logs/jx_cfd_pearl_exchange5.log 2>&1
-0 0 16,19 * * * node /scripts/jx_cfd_pearl_exchange1.js >> /scripts/logs/jx_cfd_pearl_exchange1.log 2>&1
+0 0 1,3,5,7,16,19 * * * node /scripts/jx_cfd_pearl_exchange5.js >> /scripts/logs/jx_cfd_pearl_exchange5.log 2>&1
+0 0 2,4,6,8,17,20 * * * node /scripts/jx_cfd_pearl_exchange1.js >> /scripts/logs/jx_cfd_pearl_exchange1.log 2>&1
