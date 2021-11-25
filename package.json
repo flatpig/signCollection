@@ -16,6 +16,8 @@
   "author": "LXK9301",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.24.0",
+    "moment": "^2.29.1",
     "crypto-js": "^4.0.0",
     "download": "^6.2.5",
     "got": "^11.5.1",
