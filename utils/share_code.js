@@ -2,7 +2,7 @@ var allShareCodes = [];
 var removedShareCodes = [];
 // var chetou_number = process.env.CHETOU_NUMBER ? process.env.CHETOU_NUMBER : 0;
 // var fair_mode = process.env.FAIR_MODE ? true : false
-var chetou_number = 2;
+var chetou_number = 0;
 var fair_mode = true;
 var precode_mode = process.env.PRECODE_MODE ? false : true;
 
@@ -56,7 +56,11 @@ exports.setDefaultShareCodes = function (str) {
   console.log(`您提供了${shareCodes.length}个账号的助力码\n`);
   if (shareCodes && shareCodes.length) {
     for (var shareCode of shareCodes) {
-      if (shareCode && shareCode != 'undefined' && allShareCodes.indexOf(shareCode) == -1) {
+      if (
+        shareCode &&
+        shareCode != 'undefined' &&
+        allShareCodes.indexOf(shareCode) == -1
+      ) {
         allShareCodes.push(shareCode);
       }
     }
