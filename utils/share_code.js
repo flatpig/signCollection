@@ -15,7 +15,8 @@ exports.ModCK = function (cks) {
   var sck = [];
   var eck = [];
   for (var i = 0; i < cks.length; i++) {
-    if (i <= chetou_number - 1) {
+    // if (i <= chetou_number - 1) { // 临时更新
+    if (i === 4 || i === 5 || i === 6 || i === 7) {
       sck.push(cks[i]);
     } else {
       eck.push(cks[i]);
@@ -56,11 +57,7 @@ exports.setDefaultShareCodes = function (str) {
   console.log(`您提供了${shareCodes.length}个账号的助力码\n`);
   if (shareCodes && shareCodes.length) {
     for (var shareCode of shareCodes) {
-      if (
-        shareCode &&
-        shareCode != 'undefined' &&
-        allShareCodes.indexOf(shareCode) == -1
-      ) {
+      if (shareCode && shareCode != 'undefined' && allShareCodes.indexOf(shareCode) == -1) {
         allShareCodes.push(shareCode);
       }
     }
