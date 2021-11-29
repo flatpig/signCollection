@@ -15,9 +15,9 @@ exports.ModCK = function (cks) {
   var sck = [];
   var eck = [];
   for (var i = 0; i < cks.length; i++) {
-    if (i <= chetou_number - 1) {
-      // 临时更新
-      // if (i === 4 || i === 5 || i === 6 || i === 7) {
+    // if (i <= chetou_number - 1) {
+    // 临时更新
+    if (i === 4 || i === 5 || i === 6 || i === 7) {
       sck.push(cks[i]);
     } else {
       eck.push(cks[i]);
