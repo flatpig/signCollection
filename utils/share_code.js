@@ -3,7 +3,7 @@ var removedShareCodes = [];
 // var chetou_number = process.env.CHETOU_NUMBER ? process.env.CHETOU_NUMBER : 0;
 // var fair_mode = process.env.FAIR_MODE ? true : false
 var chetou_number = 0;
-var fair_mode = false;
+var fair_mode = trues;
 var precode_mode = process.env.PRECODE_MODE ? false : true;
 
 exports.ModCK = function (cks) {
@@ -15,9 +15,9 @@ exports.ModCK = function (cks) {
   var sck = [];
   var eck = [];
   for (var i = 0; i < cks.length; i++) {
-    if (i <= chetou_number - 1) {
-      // 临时更新
-      // if (i === 5 || i === 7 || i === 8 || i === 9) {
+    // if (i <= chetou_number - 1) {
+    // 临时更新
+    if (i === 5 || i === 7 || i === 8 || i === 9) {
       sck.push(cks[i]);
     } else {
       eck.push(cks[i]);
