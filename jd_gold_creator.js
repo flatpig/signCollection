@@ -99,7 +99,7 @@ async function getDetail() {
   for (let item of $.subTitleInfos) {
     console.log(`\n开始给【${item['longTitle']}】主题下的商品进行投票`);
     await goldCreatorDetail(item['matGrpId'], item['subTitleId'], item['taskId'], item['batchId']);
-    await $.wait(4000);
+    await $.wait(2000);
   }
 }
 function goldCreatorTab() {
