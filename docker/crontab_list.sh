@@ -32,7 +32,7 @@
 # 京喜签到
 5 1,11,20 * * * node /scripts/jx_sign.js >> /scripts/logs/jx_sign.log 2>&1
 # 东东超市兑换奖品
-59 23 * * * node /scripts/jd_blueCoin.js >> /scripts/logs/jd_blueCoin.log 2>&1
+#59 23 * * * node /scripts/jd_blueCoin.js >> /scripts/logs/jd_blueCoin.log 2>&1
 # 摇京豆
 6 0,14,23 * * * node /scripts/jd_club_lottery.js >> /scripts/logs/jd_club_lottery.log 2>&1
 # 东东农场
@@ -56,7 +56,7 @@
 # 进店领豆
 6 0 * * * node /scripts/jd_shop.js >> /scripts/logs/jd_shop.log 2>&1
 # 东东超市
-31 0,1-23/2 * * * node /scripts/jd_superMarket.js >> /scripts/logs/jd_superMarket.log 2>&1
+#31 0,1-23/2 * * * node /scripts/jd_superMarket.js >> /scripts/logs/jd_superMarket.log 2>&1
 # 取关京东店铺商品
 45 23 * * * node /scripts/jd_unsubscribe.js >> /scripts/logs/jd_unsubscribe.log 2>&1
 # 京豆变动通知
