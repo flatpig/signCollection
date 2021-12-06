@@ -172,4 +172,7 @@
 
 # 直播红包雨
 #0,30 0-23/1 * * * node /scripts/jd_live_redrain_B.js >> /scripts/logs/jd_live_redrain_B.log 2>&1
-
+# 电脑配件
+15 15 * * *  node /scripts/jd_dlpj.js >> /scripts/logs/jd_dlpj.log 2>&1
+# 生鲜签到
+30 7 * * * node /scripts/jd_sxLottery.js >> /scripts/logs/jd_sxLottery.log 2>&1
