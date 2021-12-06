@@ -97,6 +97,8 @@
 1 0,6-23 * * * node /scripts/jd_cfd.js >> /scripts/logs/jd_cfd.log 2>&1
 # 京喜财富岛合成月饼
 5 * * * * node /scripts/jd_cfd_mooncake.js >> /scripts/logs/jd_cfd_mooncake.log 2>&1
+#
+20 0 * * * node /scripts/jd_cfd_mooncake_help.js >> /scripts/logs/jd_cfd_mooncake_help.log 2>&1
 # 京喜财富岛热气球
 30 * * * * node /scripts/jd_cfd_loop.js >> /scripts/logs/jd_cfd_loop.log 2>&1
 # 京东健康社区
@@ -140,6 +142,8 @@
 #1 0,11,21 * * * node /scripts/jd_jump.js >> /scripts/logs/jd_jump.log 2>&1
 # 京东图形签到
 14 2,10 * * * node /scripts/jd_sign_graphics.js >> /scripts/logs/jd_sign_graphics.log 2>&1
+# M京东签到
+14 10 * * * node /scripts/jd_sign.js >> /scripts/logs/jd_sign.log 2>&1
 # 京喜大作战
 39 1,14 * * * node /scripts/jd_jxdzz.js >> /scripts/logs/jd_jxdzz.log 2>&1
 # 签到免单
@@ -162,8 +166,7 @@
 #22 6,18 * * * node /scripts/jd_jddt.js >> /scripts/logs/jd_jddt.log 2>&1
 # 京东金榜
 13 6 * * * node /scripts/jd_gold_sign.js >> /scripts/logs/jd_gold_sign.log 2>&1
-# 签到翻牌
-30 8 * * * node /scripts/jd_sign_graphics1.js >> /scripts/logs/jd_sign_graphics1.log 2>&1
+
 # 美妆馆兑换
 40 8,13,19 * * * node /scripts/jd_beauty_ex.js >> /scripts/logs/jd_beauty_ex.log 2>&1
 
