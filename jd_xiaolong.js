@@ -1,6 +1,7 @@
 /*
-10 1,21 * * * jd_xiaolong.js
-*/
+助力第一个CK。不知道还有没有豆子
+cron 10 9,17 * * * https://raw.githubusercontent.com/star261/jd/main/scripts/jd_xiaolong.js
+* */
 const $ = new Env('骁龙');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 let cookiesArr = [];
@@ -141,10 +142,10 @@ function takePostRequest(type) {
             body = `activityId=${activityID}&actorUuid=${actorUuid}&param=${$.param}&taskType=${$.taskType}&pin=${encodeURIComponent(pin)}&shareUuid=${$.shareUuid}`;
             break;
         case 'doTask2':
-            let aa = ['f4ea5fc2df914528a60719bfef0e6248'];
+            let aa = ['29b379e745cf4463a08f2efc70fc27a4','06f4ada464f546fa9a787b72b98e65be'];
             let code = getRandomArrayElements(aa,1)[0]
             url = 'https://lzdz-isv.isvjcloud.com/unify/cardTaskDraw/doTask';
-            body = `activityId=${activityID}&actorUuid=${actorUuid}&param=${$.param}&taskType=20&pin=${encodeURIComponent(pin)}&shareUuid=24cd40992bc54a0da19cdd9f9d13fa5d`;
+            body = `activityId=${activityID}&actorUuid=${actorUuid}&param=${$.param}&taskType=20&pin=${encodeURIComponent(pin)}&shareUuid=${code}`;
             break;
         case 'getTaskList':
             url = 'https://lzdz-isv.isvjcloud.com/unify/common/getTaskList';
