@@ -176,3 +176,5 @@
 15 15 * * *  node /scripts/jd_dlpj.js >> /scripts/logs/jd_dlpj.log 2>&1
 # 生鲜签到
 30 7 * * * node /scripts/jd_sxLottery.js >> /scripts/logs/jd_sxLottery.log 2>&1
+# 金榜年终奖 
+39 0,9 * * * node /scripts/jd_split.js >> /scripts/logs/jd_split.log 2>&1
