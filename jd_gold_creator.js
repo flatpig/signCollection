@@ -7,17 +7,17 @@
 ===================quantumultx================
 [task_local]
 #金榜创造营
-2 1,22 * * * jd_gold_creator.js, tag=金榜创造营, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+13 1,22 * * * jd_gold_creator.js, tag=金榜创造营, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 
 =====================Loon================
 [Script]
-cron "2 1,22 * * *" script-path=jd_gold_creator.js, tag=金榜创造营
+cron "13 1,22 * * *" script-path=jd_gold_creator.js, tag=金榜创造营
 
 ====================Surge================
-金榜创造营 = type=cron,cronexp="2 1,22 * * *",wake-system=1,timeout=3600,script-path=jd_gold_creator.js
+金榜创造营 = type=cron,cronexp="13 1,22 * * *",wake-system=1,timeout=3600,script-path=jd_gold_creator.js
 
 ============小火箭=========
-金榜创造营 = type=cron,script-path=jd_gold_creator.js, cronexpr="2 1,22 * * *", timeout=3600, enable=true
+金榜创造营 = type=cron,script-path=jd_gold_creator.js, cronexpr="13 1,22 * * *", timeout=3600, enable=true
  */
 const $ = new Env('金榜创造营');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -25,22 +25,7 @@ const notify = $.isNode() ? require('./sendNotify') : '';
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message;
-const UA = `jdapp;iPhone;10.2.4;14.6;${randomWord(false,40,40)};network/wifi;JDEbook/openapp.jdreader;model/iPhone9,2;addressid/0;appBuild/167874;jdSupportDarkMode/0;Mozilla/5.0 (iPhone; CPU iPhone OS 14_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/16E158;supportJDSHWK/1`;
-function randomWord(randomFlag, min, max){
-  var str = "",
-    range = min,
-    arr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
-  // 随机产生
-  if(randomFlag){
-    range = Math.round(Math.random() * (max-min)) + min;
-  }
-  for(var i=0; i<range; i++){
-    pos = Math.round(Math.random() * (arr.length-1));
-    str += arr[pos];
-  }
-  return str;
-}
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
     cookiesArr.push(jdCookieNode[item])
@@ -115,7 +100,7 @@ async function getDetail() {
   for (let item of $.subTitleInfos) {
     console.log(`\n开始给【${item['longTitle']}】主题下的商品进行投票`);
     await goldCreatorDetail(item['matGrpId'], item['subTitleId'], item['taskId'], item['batchId']);
-    await $.wait(2000);
+    await $.wait(4000);
   }
 }
 function goldCreatorTab() {
@@ -226,7 +211,7 @@ async function doTask2(batchId) {
         body['type'] = 2;
       }
       await goldCreatorDoTask(body);
-      await $.wait(2000);
+      await $.wait(4000);
     }
   }
   if ($.signTask['taskStatus'] === 1) {
@@ -304,7 +289,7 @@ function taskUrl(function_id, body = {}) {
       "Host": "api.m.jd.com",
       "Referer": "https://h5.m.jd.com/",
       "Cookie": cookie,
-      "User-Agent": UA
+      "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1")
     }
   }
 }
@@ -318,7 +303,7 @@ function TotalBean() {
         Accept: "*/*",
         Connection: "keep-alive",
         Cookie: cookie,
-        "User-Agent": UA,
+        "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
         "Accept-Language": "zh-cn",
         "Referer": "https://home.m.jd.com/myJd/newhome.action?sceneval=2&ufc=&",
         "Accept-Encoding": "gzip, deflate, br"

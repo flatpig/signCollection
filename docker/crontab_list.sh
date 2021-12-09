@@ -175,7 +175,7 @@
 # 电脑配件
 10 0 * * *  node /scripts/jd_dlpj.js >> /scripts/logs/jd_dlpj.log 2>&1
 # 生鲜签到
-10 7 17-18 8 * node /scripts/jd_sxLottery.js >> /scripts/logs/jd_sxLottery.log 2>&1
+#10 7 17-18 8 * node /scripts/jd_sxLottery.js >> /scripts/logs/jd_sxLottery.log 2>&1
 # 金榜年终奖 
 39 0,9 * * * node /scripts/jd_split.js >> /scripts/logs/jd_split.log 2>&1
 #
