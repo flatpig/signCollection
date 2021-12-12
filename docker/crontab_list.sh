@@ -180,3 +180,7 @@
 39 0,9 * * * node /scripts/jd_split.js >> /scripts/logs/jd_split.log 2>&1
 #
 10 7 * * * node /scripts/jd_lxLottery.js >> /scripts/logs/jd_lxLottery.log 2>&1
+# 半点红包雨
+30 20-23/1 * * * node /scripts/jd_redrain_half.js >> /scripts/logs/jd_redrain_half.log 2>&1
+# 半点红包雨
+0 * * * * node /scripts/jd_redrain.js >> /scripts/logs/jd_redrain.log 2>&1
