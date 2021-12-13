@@ -15,7 +15,7 @@
 # 酷跑零食街
 18 7,12,20 * * * node /scripts/jd_foodRunning.js >> /scripts/logs/jd_foodRunning.log 2>&1
 # 京喜领88元红包
-4 3,13,21 * * * node /scripts/jd_jxlhb.js >> /scripts/logs/jd_jxlhb.log 2>&1
+#4 3,13,21 * * * node /scripts/jd_jxlhb.js >> /scripts/logs/jd_jxlhb.log 2>&1
 # 众筹许愿池
 20 0,2,19 * * * node /scripts/jd_wish.js >> /scripts/logs/jd_wish.log 2>&1
 # 内容鉴赏官
@@ -176,8 +176,7 @@
 10 0 * * *  node /scripts/jd_dlpj.js >> /scripts/logs/jd_dlpj.log 2>&1
 # 生鲜签到
 10 7 17-18 8 * node /scripts/jd_sxLottery.js >> /scripts/logs/jd_sxLottery.log 2>&1
-# 金榜年终奖 
-39 0,9 * * * node /scripts/jd_split.js >> /scripts/logs/jd_split.log 2>&1
+
 #
 10 7 * * * node /scripts/jd_lxLottery.js >> /scripts/logs/jd_lxLottery.log 2>&1
 # 半点红包雨
