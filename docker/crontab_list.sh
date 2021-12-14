@@ -109,7 +109,7 @@
 10 10,23 * * * node /scripts/jd_market_lottery.js >> /scripts/logs/jd_market_lottery.log 2>&1
 # 京喜牧场
 23 0-23/2 * * * node /scripts/jd_jxmc.js >> /scripts/logs/jd_jxmc.log 2>&1
-30 0-23/6 * * * node /scripts/jd_jxmc_help.js >> /scripts/logs/jd_jxmc_help.log 2>&1
+30 0-23/3 * * * node /scripts/jd_jxmc_hb.js >> /scripts/logs/jd_jxmc_hb.log 2>&1
 # 京喜工厂开团
 9 0-8/1 * * *  node /scripts/jd_star_dreamFactory_tuan.js >> /scripts/logs/jd_star_dreamFactory_tuan.log 2>&1
 # 领券中心签到
@@ -157,7 +157,7 @@
 # 赚京豆(微信小程序)
 0-59/20 1,2 * * * node /scripts/jd_syj.js >> /scripts/logs/jd_syj.log 2>&1
 # 特务Z
-23 8,20 * * * node /scripts/jd_superBrand.js >> /scripts/logs/jd_superBrand.log 2>&1
+23 8,11,20 * * * node /scripts/jd_superBrand.js >> /scripts/logs/jd_superBrand.log 2>&1
 # 财富岛合成生鲜
 45 * * * * node /scripts/jd_cfd_fresh.js >> /scripts/logs/jd_cfd_fresh.log 2>&1
 # 财富岛合成生鲜兑换
