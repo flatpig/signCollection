@@ -162,8 +162,6 @@
 45 * * * * node /scripts/jd_cfd_fresh.js >> /scripts/logs/jd_cfd_fresh.log 2>&1
 # 财富岛合成生鲜兑换
 #0 12 * * * node /scripts/jd_cfd_fresh_exchange.js >> /scripts/logs/jd_cfd_fresh_exchange.log 2>&1
-# 京东答题
-#22 6,18 * * * node /scripts/jd_jddt.js >> /scripts/logs/jd_jddt.log 2>&1
 # 京东金榜
 13 6 * * * node /scripts/jd_gold_sign.js >> /scripts/logs/jd_gold_sign.log 2>&1
 
@@ -173,7 +171,7 @@
 # 直播红包雨
 0,30 0-23/1 * * * node /scripts/jd_live_redrain_B.js >> /scripts/logs/jd_live_redrain_B.log 2>&1
 # 电脑配件
-10 0 * * *  node /scripts/jd_dlpj.js >> /scripts/logs/jd_dlpj.log 2>&1
+#10 0 * * *  node /scripts/jd_dlpj.js >> /scripts/logs/jd_dlpj.log 2>&1
 # 生鲜签到
 10 7 17-18 8 * node /scripts/jd_sxLottery.js >> /scripts/logs/jd_sxLottery.log 2>&1
 
@@ -182,6 +180,6 @@
 # 半点红包雨
 30 20-23/1 * * * node /scripts/jd_redrain_half.js >> /scripts/logs/jd_redrain_half.log 2>&1
 # 半点红包雨
-0 * * * * node /scripts/jd_redrain.js >> /scripts/logs/jd_redrain.log 2>&1
+#0 * * * * node /scripts/jd_redrain.js >> /scripts/logs/jd_redrain.log 2>&1
 # 京喜签到-喜豆
 30 2,9 * * * node /scripts/jx_sign_xd.js >> /scripts/logs/jx_sign_xd.log 2>&1
