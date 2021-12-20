@@ -179,3 +179,5 @@
 30 2,9 * * * node /scripts/jx_sign_xd.js >> /scripts/logs/jx_sign_xd.log 2>&1
 #
 27 0-23/6 * * * node /scripts/jd_jdtj_winner.js >> /scripts/logs/jd_jdtj_winner.log 2>&1
+# 
+27 10,16 * 12 * node /scripts/jd_fxhh.js >> /scripts/logs/jd_fxhh.log 2>&1
