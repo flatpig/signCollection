@@ -159,9 +159,7 @@
 # 特务Z
 23 8,11,20 * * * node /scripts/jd_superBrand.js >> /scripts/logs/jd_superBrand.log 2>&1
 # 财富岛合成生鲜
-45 * * * * node /scripts/jd_cfd_fresh.js >> /scripts/logs/jd_cfd_fresh.log 2>&1
-# 财富岛合成生鲜兑换
-#0 12 * * * node /scripts/jd_cfd_fresh_exchange.js >> /scripts/logs/jd_cfd_fresh_exchange.log 2>&1
+#45 * * * * node /scripts/jd_cfd_fresh.js >> /scripts/logs/jd_cfd_fresh.log 2>&1
 # 京东金榜
 13 6 * * * node /scripts/jd_gold_sign.js >> /scripts/logs/jd_gold_sign.log 2>&1
 
@@ -170,10 +168,6 @@
 
 # 直播红包雨
 0,30 0-23/1 * * * node /scripts/jd_live_redrain_B.js >> /scripts/logs/jd_live_redrain_B.log 2>&1
-# 电脑配件
-#10 0 * * *  node /scripts/jd_dlpj.js >> /scripts/logs/jd_dlpj.log 2>&1
-# 生鲜签到
-10 7 17-18 8 * node /scripts/jd_sxLottery.js >> /scripts/logs/jd_sxLottery.log 2>&1
 
 #
 10 7 * * * node /scripts/jd_lxLottery.js >> /scripts/logs/jd_lxLottery.log 2>&1
@@ -183,5 +177,5 @@
 #0 * * * * node /scripts/jd_redrain.js >> /scripts/logs/jd_redrain.log 2>&1
 # 京喜签到-喜豆
 30 2,9 * * * node /scripts/jx_sign_xd.js >> /scripts/logs/jx_sign_xd.log 2>&1
-# 京车会签到
-5 7 * * * node /scripts/jd_jchsign.js >> /scripts/logs/jd_jchsign.log 2>&1
+#
+27 0-23/6 * * * node /scripts/jd_jdtj_winner.js >> /scripts/logs/jd_jdtj_winner.log 2>&1

@@ -70,7 +70,7 @@ if ($.isNode()) {
   for (let j = 0; j < cookiesArr.length; j++) {
     cookie = cookiesArr[j];
     if ($.shareCodes && $.shareCodes.length) {
-      console.log(`\n自己账号内部循环互助，有剩余次数再帮作者助力\n`);
+      console.log(`\n自己账号内部循环互助，有剩余次数再帮【zero205】助力\n`);
       for (let item of $.shareCodes) {
         await pigPetLotteryHelpFriend(item)
         await $.wait(1000)
@@ -78,7 +78,7 @@ if ($.isNode()) {
       }
     }
   }
-  if (process.env.PIGNF != 'false' && allMessage && new Date().getHours() % 6 === 0) {
+  if (process.env.PIGNF != 'false' && allMessage) {
     if ($.isNode()) await notify.sendNotify($.name, allMessage);
     $.msg($.name, '', allMessage);
   }
@@ -865,7 +865,7 @@ function finishReadMission(missionId, readTime) {
 function getShareCode() {
   return new Promise(resolve => {
     $.get({
-      url: "https://raw.fastgit.org/ze5/updateTeam/main/shareCodes/pig.json",
+      url: "https://raw.fastgit.org/zero205/updateTeam/main/shareCodes/pig.json",
       headers: {
         "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/87.0.4280.88"
       }

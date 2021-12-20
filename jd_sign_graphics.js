@@ -3,7 +3,7 @@ cron 14 10 * * * https://raw.githubusercontent.com/smiek2121/scripts/master/jd_s
 
 */
 
-// const validator = require('./JDJRValidator_Pure.js');
+// const validator = require('./JDJRValidator_Smiek.js');
 // const Faker=require('./sign_graphics_validate.js');
 
 const $ = new Env('京东签到图形验证');

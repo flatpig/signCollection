@@ -1,5 +1,5 @@
 /*
-0 7,16 * * * jd_speed_sign.js
+0 7 * * * jd_speed_sign.js
 京东极速版签到+赚现金任务
 每日9毛左右，满3，10，50可兑换无门槛红包
 ⚠️⚠️⚠️一个号需要运行40分钟左右
@@ -11,17 +11,17 @@
 ============Quantumultx===============
 [task_local]
 #京东极速版
-0 7,16 * * * jd_speed_sign.js, tag=京东极速版, img-url=https://raw.githubusercontent.com/Orz-3/task/master/jd.png, enabled=true
+0 7 * * * jd_speed_sign.js, tag=京东极速版, img-url=https://raw.githubusercontent.com/Orz-3/task/master/jd.png, enabled=true
 
 ================Loon==============
 [Script]
-cron "0 7,16 * * *" script-path=jd_speed_sign.js,tag=京东极速版
+cron "0 7 * * *" script-path=jd_speed_sign.js,tag=京东极速版
 
 ===============Surge=================
-京东极速版 = type=cron,cronexp="0 7,16 * * *",wake-system=1,timeout=33600,script-path=jd_speed_sign.js
+京东极速版 = type=cron,cronexp="0 7 * * *",wake-system=1,timeout=33600,script-path=jd_speed_sign.js
 
 ============小火箭=========
-京东极速版 = type=cron,script-path=jd_speed_sign.js, cronexpr="0 7,16 * * *", timeout=33600, enable=true
+京东极速版 = type=cron,script-path=jd_speed_sign.js, cronexpr="0 7 * * *", timeout=33600, enable=true
 */
 
 const $ = new Env('京东极速版');
@@ -93,7 +93,7 @@ async function jdGlobal() {
     await apTaskList()
     await wheelsHome()
     if ($.canhelp) {
-      console.log(`\n京东账号${$.index}开始助力作者邀请有礼，感谢！\n`);
+      console.log(`\n京东账号${$.index}开始助力【zero205】邀请有礼，感谢！\n`);
       await invite()
       await invite2()
     }
@@ -206,7 +206,7 @@ async function cashout() {
               if (data.subCode === 0 && data.data.cashOutSuccess === true) {
                 console.log(`红包兑换成功，剩余${data.data.cashDrawAmount}元`)
                 if ($.isNode()) {
-                  await notify.sendNotify(`${$.name}`, `【京东账号${$.index}】 ${$.nickName}\n兑换红包成功，请尽快使用\n更多脚本->"https://github.com/inoyna12/JDsc"`);
+                  await notify.sendNotify(`${$.name}`, `【京东账号${$.index}】 ${$.nickName}\n兑换红包成功，请尽快使用\n更多脚本->"https://github.com/zero205/JD_tencent_scf"`);
                 }
               } else {
                 console.log(`红包兑换失败，${data.msg}`)
@@ -796,10 +796,9 @@ function taskGetUrl(function_id, body) {
 }
 
 function invite2() {
-  let t = +new Date()
   let inviterId = [
-    "Pj9PqVWuUzCEm7gt2eXdjC8hpNWAA6hz9OmxlR/srEw=",
-    "M419FwNhHS3VVWYbwjo6Gw=="
+    "/eNHdfn6fP+TFwVda3ipjWwvTFqeKBZaRG38adWABKk=",
+    "Sev6JWjut6GyaEHJIWpSQQ=="
   ][Math.floor((Math.random() * 2))]
   let headers = {
     'Host': 'api.m.jd.com',
@@ -812,7 +811,7 @@ function invite2() {
     'Cookie': cookie
   }
 
-  let dataString = `functionId=TaskInviteService&body={"method":"participateInviteTask","data":{"channel":"1","encryptionInviterPin":"${encodeURIComponent(inviterId)}","type":1}}&appid=market-task-h5&uuid=&_t=${t}`;
+  let dataString = `functionId=TaskInviteService&body={"method":"participateInviteTask","data":{"channel":"1","encryptionInviterPin":"${encodeURIComponent(inviterId)}","type":1}}&appid=market-task-h5&uuid=&_t=${Date.now()}`;
 
   var options = {
     url: 'https://api.m.jd.com/',
@@ -827,9 +826,13 @@ function invite2() {
 function invite() {
   let t = +new Date()
   let inviterId = [
-    "Pj9PqVWuUzCEm7gt2eXdjC8hpNWAA6hz9OmxlR/srEw=",
-    "M419FwNhHS3VVWYbwjo6Gw=="
-  ][Math.floor((Math.random() * 2))]
+    "/eNHdfn6fP+TFwVda3ipjWwvTFqeKBZaRG38adWABKk=",
+    "R+eeS9UrTadw7yIF7ubkxBOARQK0BNXiQLVF0TyAf4Q=",
+    "4OAzIinjvoFYHDImve1/VA==",
+    "N0xw0OCPJTUt8xzWZPWs3w==",
+    "z///voP4pDo+KI13j5As9g==",
+    "Sev6JWjut6GyaEHJIWpSQQ=="
+  ][Math.floor((Math.random() * 6))]
   var headers = {
     'Host': 'api.m.jd.com',
     'accept': 'application/json, text/plain, */*',
