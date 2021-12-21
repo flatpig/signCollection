@@ -21,6 +21,7 @@
     "crypto-js": "^4.0.0",
     "date-fns": "^2.22.1",
     "download": "^6.2.5",
+    "dotenv": "^10.0.0",
     "got": "^11.5.1",
     "http-server": "^0.12.3",
     "js-base64": "^3.7.2",
