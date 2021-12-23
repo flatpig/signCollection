@@ -168,7 +168,8 @@
 
 # 直播红包雨
 0,30 0-23/1 * * * node /scripts/jd_live_redrain_B.js >> /scripts/logs/jd_live_redrain_B.log 2>&1
-
+# 
+50 12-14 * * * node /scripts/jd_live.js >> /scripts/logs/jd_live.log 2>&1
 #
 10 7 * * * node /scripts/jd_lxLottery.js >> /scripts/logs/jd_lxLottery.log 2>&1
 # 半点红包雨
