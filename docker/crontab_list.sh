@@ -165,7 +165,7 @@
 # 京东金榜
 13 6 * * * node /scripts/jd_gold_sign.js >> /scripts/logs/jd_gold_sign.log 2>&1
 # 美妆馆兑换
-40 8,13,19 * * * node /scripts/jd_beauty_ex.js >> /scripts/logs/jd_beauty_ex.log 2>&1
+#40 8,13,19 * * * node /scripts/jd_beauty_ex.js >> /scripts/logs/jd_beauty_ex.log 2>&1
 
 # 直播红包雨
 0,30 0-23/1 * * * node /scripts/jd_live_redrain_B.js >> /scripts/logs/jd_live_redrain_B.log 2>&1
@@ -182,4 +182,4 @@
 #
 27 0-23/6 * * * node /scripts/jd_jdtj_winner.js >> /scripts/logs/jd_jdtj_winner.log 2>&1
 # 
-27 10,16 * 12 * node /scripts/jd_fxhh.js >> /scripts/logs/jd_fxhh.log 2>&1
+#27 10,16 * 12 * node /scripts/jd_fxhh.js >> /scripts/logs/jd_fxhh.log 2>&1
