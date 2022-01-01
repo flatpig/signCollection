@@ -184,4 +184,6 @@
 #
 27 0-23/6 * * * node /scripts/jd_jdtj_winner.js >> /scripts/logs/jd_jdtj_winner.log 2>&1
 # 
-#27 10,16 * 12 * node /scripts/jd_fxhh.js >> /scripts/logs/jd_fxhh.log 2>&1
+10 0,12 * * * node /scripts/jd_hb_a.js >> /scripts/logs/jd_hb_a.log 2>&1
+#
+10 7 * * *  node /scripts/jd_sxLottery.js >> /scripts/logs/jd_sxLottery.log 2>&1
