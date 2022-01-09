@@ -155,3 +155,5 @@
 10 7 * * *  node /scripts/jd_sxLottery.js >> /scripts/logs/jd_sxLottery.log 2>&1
 # 
 14 3,23 * * * node /scripts/jd_nh_sign.js >> /scripts/logs/jd_nh_sign.log 2>&1
+#
+0 0-23/5 * * * node /scripts/jd_city.js >> /scripts/logs/jd_city.log 2>&1
