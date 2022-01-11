@@ -149,8 +149,6 @@
 30 2,9 * * * node /scripts/jx_sign_xd.js >> /scripts/logs/jx_sign_xd.log 2>&1
 #
 27 0-23/6 * * * node /scripts/jd_jdtj_winner.js >> /scripts/logs/jd_jdtj_winner.log 2>&1
-# 
-10 0,12 * * * node /scripts/jd_hb_a.js >> /scripts/logs/jd_hb_a.log 2>&1
 #
 10 7 * * *  node /scripts/jd_sxLottery.js >> /scripts/logs/jd_sxLottery.log 2>&1
 # 
