@@ -165,3 +165,4 @@
 31 20-23/1 * * * node /scripts/jd_redrain_half.js >> /scripts/logs/jd_redrain_half.log 2>&1
 #
 #0 0,12,20,21 * * * node /scripts/jd_redEnvelope.js >> /scripts/logs/jd_redEnvelope.log 2>&1
+33 0,13 * * * node /scripts/jd_ttysq.js >> /scripts/logs/jd_ttysq.log 2>&1
