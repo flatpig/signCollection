@@ -130,6 +130,7 @@
 4 0-23/6 * * * node /scripts/jd_jx_cashback.js >> /scripts/logs/jd_jx_cashback.log 2>&1
 # 萌虎摇摇乐
 0 0,12,18 * * * node /scripts/jd_tiger.js >> /scripts/logs/jd_tiger.log 2>&1
+8 0,18 * * * node /scripts/jd_tiger_help.js >> /scripts/logs/jd_tiger_help.log 2>&1
 # 京东图形签到
 3 0 * * * node /scripts/jd_m_sign.js >> /scripts/logs/jd_m_sign.log 2>&1
 #14 2,10 * * * node /scripts/jd_sign_graphics.js >> /scripts/logs/jd_sign_graphics.log 2>&1
@@ -164,5 +165,5 @@
 #
 31 20-23/1 * * * node /scripts/jd_redrain_half.js >> /scripts/logs/jd_redrain_half.log 2>&1
 #
-0 0,20 * * *  node /scripts/jd_nhs_rpb.js >> /scripts/logs/jd_nhs_rpb.log 2>&1
+0 0,20 * * *  node /scripts/jd_nhs_rpc.js >> /scripts/logs/jd_nhs_rpc.log 2>&1
 33 0,13 * * * node /scripts/jx_ttysq.js >> /scripts/logs/jx_ttysq.log 2>&1
