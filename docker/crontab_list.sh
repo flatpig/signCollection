@@ -167,3 +167,4 @@
 #
 0 0,20 * * *  node /scripts/jd_nhs_rpc.js >> /scripts/logs/jd_nhs_rpc.log 2>&1
 33 0,13 * * * node /scripts/jx_ttysq.js >> /scripts/logs/jx_ttysq.log 2>&1
+0 0,3 * * * node /scripts/jd_babel_sign.js >> /scripts/logs/jd_babel_sign.log 2>&1
