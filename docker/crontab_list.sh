@@ -117,7 +117,7 @@
 5 0,1-23/3 * * * node /scripts/jd_mohe.js >> /scripts/logs/jd_mohe.log 2>&1
 5 0,19 * * * node /scripts/jd_mohe_help.js >> /scripts/logs/jd_mohe_help.log 2>&1
 # 东东乐园领水滴
-11 8 * * * node /scripts/jd_ddnc_farmpark.js >> /scripts/logs/jd_ddnc_farmpark.log 2>&1
+11 8 * * * node /scripts/jd_ddly.js >> /scripts/logs/jd_ddly.log 2>&1
 # 积分换话费
 13 5,17 * * * node /scripts/jd_dwapp.js >> /scripts/logs/jd_dwapp.log 2>&1
 # 金贴小程序
@@ -168,3 +168,5 @@
 0 0,20 * * *  node /scripts/jd_nhs_rpc.js >> /scripts/logs/jd_nhs_rpc.log 2>&1
 33 0,13 * * * node /scripts/jx_ttysq.js >> /scripts/logs/jx_ttysq.log 2>&1
 0 0,3 * * * node /scripts/jd_babel_sign.js >> /scripts/logs/jd_babel_sign.log 2>&1
+10 0 1-30 1 * node /scripts/jd_sjnhj.js >> /scripts/logs/jd_sjnhj.log 2>&1
+0 0,12,18 * * * node /scripts/jd_mhyyl.js >> /scripts/logs/jd_mhyyl.log 2>&1
