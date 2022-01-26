@@ -170,3 +170,5 @@
 0 0,3 * * * node /scripts/jd_babel_sign.js >> /scripts/logs/jd_babel_sign.log 2>&1
 10 0 1-30 1 * node /scripts/jd_sjnhj.js >> /scripts/logs/jd_sjnhj.log 2>&1
 0 0,12,18 * * * node /scripts/jd_mhyyl.js >> /scripts/logs/jd_mhyyl.log 2>&1
+10 22 * * * node /scripts/jd_mhyyl_prize.js >> /scripts/logs/jd_mhyyl_prize.log 2>&1
+30 3,20 * * * node /scripts/jd_mofang.js >> /scripts/logs/jd_mofang.log 2>&1
