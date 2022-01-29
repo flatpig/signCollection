@@ -152,10 +152,7 @@
 27 0-23/6 * * * node /scripts/jd_jdtj_winner.js >> /scripts/logs/jd_jdtj_winner.log 2>&1
 #
 10 7 * * *  node /scripts/jd_sxLottery.js >> /scripts/logs/jd_sxLottery.log 2>&1
-# 
-14 3,23 * * * node /scripts/jd_nh_sign.js >> /scripts/logs/jd_nh_sign.log 2>&1
-#
-0 0-23/5 * * * node /scripts/jd_city.js >> /scripts/logs/jd_city.log 2>&1
+
 #
 10 8 * * * node /scripts/jd_mpdzcar.js >> /scripts/logs/jd_mpdzcar.log 2>&1
 #
@@ -165,10 +162,8 @@
 #
 31 20-23/1 * * * node /scripts/jd_redrain_half.js >> /scripts/logs/jd_redrain_half.log 2>&1
 #
-0 0,20 * * *  node /scripts/jd_nhs_rpc.js >> /scripts/logs/jd_nhs_rpc.log 2>&1
 33 0,13 * * * node /scripts/jx_ttysq.js >> /scripts/logs/jx_ttysq.log 2>&1
 0 0,3 * * * node /scripts/jd_babel_sign.js >> /scripts/logs/jd_babel_sign.log 2>&1
-10 0 1-30 1 * node /scripts/jd_sjnhj.js >> /scripts/logs/jd_sjnhj.log 2>&1
 0 0,12,18 * * * node /scripts/jd_mhyyl.js >> /scripts/logs/jd_mhyyl.log 2>&1
 10 22 * * * node /scripts/jd_mhyyl_prize.js >> /scripts/logs/jd_mhyyl_prize.log 2>&1
 30 3,20 * * * node /scripts/jd_mofang.js >> /scripts/logs/jd_mofang.log 2>&1
