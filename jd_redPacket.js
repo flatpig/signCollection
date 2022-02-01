@@ -41,12 +41,7 @@ const JD_API_HOST = 'https://api.m.jd.com/api';
     $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
     return;
   }
-  let res = await getAuthorShareCode('https://raw.githubusercontent.com/Aaron-lv/updateTeam/master/shareCodes/jd_red.json')
-  if (!res) {
-    $.http.get({url: 'https://purge.jsdelivr.net/gh/Aaron-lv/updateTeam@master/shareCodes/jd_red.json'}).then((resp) => {}).catch((e) => $.log('刷新CDN异常', e));
-    await $.wait(1000)
-    res = await getAuthorShareCode('https://cdn.jsdelivr.net/gh/Aaron-lv/updateTeam@master/shareCodes/jd_red.json')
-  }
+  let res = await getAuthorShareCode('https://raw.githubusercontent.com/inoyna12/updateTeam/master/shareCodes/jd_red.json')
   $.authorMyShareIds = [...(res || [])];
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
@@ -291,7 +286,7 @@ function taskHomePage() {
 //领取任务API,需token
 function startTask(taskType) {
   // 从taskHomePage返回的数据里面拿taskType
-  let data = {taskType};
+  let data = {"isjdapp":1,"random":"33235811","log":"4817e3a2~8,~1wsv3ig","sceneid":"JLHBhPageh5", taskType};
   data['token'] = $.md5($.md5("j" + JSON.stringify(data) + "D"))
   return new Promise((resolve) => {
     $.post(taskUrl(arguments.callee.name.toString(), data), (err, resp, data) => {
@@ -336,7 +331,7 @@ async function active(taskType) {
 
 //获取具体任务详情API
 function getTaskDetailForColor(taskType) {
-  const data = {"clientInfo":{}, taskType};
+  const data = {"isjdapp":1,"random":"33235811","log":"4817e3a2~8,~1wsv3ig","sceneid":"JLHBhPageh5", taskType};
   return new Promise((resolve) => {
     $.post(taskUrl(arguments.callee.name.toString(), data), (err, resp, data) => {
       try {
@@ -380,7 +375,7 @@ function taskReportForColor(taskType, detailId) {
 }
 //领取做完任务后的红包
 function receiveTaskRedpacket(taskType) {
-  const body = {"clientInfo":{}, taskType};
+  const body = {"isjdapp":1,"random":"33235811","log":"4817e3a2~8,~1wsv3ig","sceneid":"JLHBhPageh5", taskType};
   return new Promise((resolve) => {
     $.post(taskUrl('h5receiveRedpacketAll', body), (err, resp, data) => {
       try {
@@ -405,7 +400,7 @@ function receiveTaskRedpacket(taskType) {
 //助力API
 function jinli_h5assist(redPacketId) {
   //一个人一天只能助力两次，助力码redPacketId 每天都变
-  const body = {"clientInfo":{},redPacketId,"followShop":0,"promUserState":""};
+  const body = {"redPacketId":redPacketId,"followShop":0,"random":"56589911","log":"1635956140883~1~8,1~81BE9EF0A1C27ADB226049DF9C26D3989C48A944~115flmu~C~ThFCXBZZbW0bQ0JeWRMOahRWDB1UAhlwbh0FWwUcVk1CEhgTUAYbBAkcIWoZAg94GAIaRBU8GhJTQ1oTDAMVEhFBFwkUAAJQAwkCVwcDDQMABA4BCwJAHhdEU1UWWRREQxVCRFJEUhMaEE5VAxAPEVBXQBdCREIAFBwWQVBfFAhiBk4HDQEaAAVPBwAbUBpeQV1YbBoQU1pACAQfFFJHQQwSVFYCCVBTAwQEVggGVFRXB1UEBwBTVgBUDlJXCAUIDwUbHEBcRREME10zXl9ZBBQcFkUWCwcECgVbBwMCAgEMWwUcFQtdEg4TAQcBVg8FVgRQCwcDA1FUAwRSBwlWAgMHDwoIAgMHBgMPUgZXAgZTUhQcFldEUxQIGwBaAwFXBldVVFQEDlYFVQxTBVMBBg0AWwIEA1BVAFtXVQ5RA1JSBgADBFYOAAFUA1EDUwABDlMDVVQSGBNaRxQIG3ESQllWFnJbDkZFQwREHBR4WlIYEBUSDFNDEQwTBVUBCAFSFBwWQldDFAhiBlQFGQABBGlPFEJYQwxrFlhkWVlcXAhOAxcfFFh7MBQcFVAEHgYTGBMHAhcCTAAXHxQAAlQOBgRDGhIBBwNVAAcNBgcKBAEBA1ZQBQMGWFQDAwcNCQcAWAVRAgxQBAUAVVIDFU0UURZsGBNfXVgSWBBTVVBXUgVCRBVNFFFeEw4TQxAVEgFbFwkURgdNBB4DQxoSV1drRxQIGwBTEBkRVFUWWRRCVg9SX1kMAQcDCgAJUwMXHxRcXkEMawZNBhwEbBgTVF5WV0AIFwIAAgFaAwYGUg4DBAZKAHljUmIpBE14D3h5J3BjYApkSVFldUl4cwQNTGsHSwVjBCFYUgQremNZf0BSQUpyc1BFTHReAQQod2Z1I09iBmFYBGJUVENUYHRXXHtwIld9XwpfdE5VZGF0WQpyCHdQflhkXypkcQ8jYFtefGNJRHRoRw5+XH5nd2UmQ31jWQFqWV1Gdl5BDHYVCk9icXwGJVx9GCR1Qwd+ZmRHd3pTE31fUEBwdhRhYHAOHWEEQk5oX1pdfjZRdHVyYH05ckRBI2NiQnt1DAscXQUDUAEHD1RKGhoBSR9IckpiXH9iZUF1LndZXHd2UyZleGUnZXdTWmBmZHNfdVNKdHZ3WmAmXmVlMHR1f3RDQnVxeGE2endxZ2cGVnF1dgpicXVWZnZ0dHp1FVlhdF4JYDRjcWUiTn11eVN8dHN4WzB1d3VkdEMIYndcVQtOBFoEBkxVVhJOEFhAURMOQRRN~0s79bv8","sceneid":"JLHBhPageh5"};
   const options = taskUrl(arguments.callee.name.toString(), body)
   return new Promise((resolve) => {
     $.post(options, (err, resp, data) => {
@@ -435,7 +430,8 @@ function jinli_h5assist(redPacketId) {
 }
 //领取红包API
 function h5receiveRedpacketAll() {
-  const options = taskUrl(arguments.callee.name.toString(), {"clientInfo":{}})
+  const body = {"isjdapp":1,"random":"33235811","log":"4817e3a2~8,~1wsv3ig","sceneid":"JLHBhPageh5"};
+  const options = taskUrl(arguments.callee.name.toString(), body)
   return new Promise((resolve) => {
     $.post(options, (err, resp, data) => {
       try {
@@ -460,7 +456,7 @@ function h5receiveRedpacketAll() {
 }
 //发起助力红包API
 function h5launch() {
-  const body = {"clientInfo":{},"followShop":0,"promUserState":""};
+  const body = {"isjdapp":1,"random":"33235811","log":"4817e3a2~8,~1wsv3ig","sceneid":"JLHBhPageh5"};
   const options = taskUrl(arguments.callee.name.toString(), body)
   return new Promise((resolve) => {
     $.post(options, (err, resp, data) => {
@@ -490,7 +486,7 @@ function h5launch() {
   })
 }
 function h5activityIndex() {
-  const body = {"clientInfo":{},"isjdapp":1};
+  const body = {"isjdapp":1,"random":"33235811","log":"4817e3a2~8,~1wsv3ig","sceneid":"JLHBhPageh5"};
   const options = taskUrl(arguments.callee.name.toString(), body);
   return new Promise((resolve) => {
     $.post(options, async (err, resp, data) => {
@@ -623,7 +619,7 @@ function getAuthorShareCode(url) {
 
 function taskUrl(functionId, body = {}) {
   return {
-    url: `${JD_API_HOST}?appid=jinlihongbao&functionId=${functionId}&loginType=2&client=jinlihongbao&clientVersion=10.1.0&osVersion=iOS&d_brand=iPhone&d_model=iPhone&t=${new Date().getTime() * 1000}`,
+    url: `${JD_API_HOST}?appid=jinlihongbao&functionId=${functionId}&loginType=2&client=jinlihongbao&clientVersion=10.2.6&osVersion=iOS&d_brand=iPhone&d_model=iPhone&t=${new Date().getTime() * 1000}`,
     body: `body=${escape(JSON.stringify(body))}`,
     headers: {
       "Host": "api.m.jd.com",
