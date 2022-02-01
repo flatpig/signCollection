@@ -9,7 +9,7 @@ let cookiesArr = [],
   cookie = '';
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item, index) => {
-    if (index >= 7) cookiesArr.push(jdCookieNode[item]);
+    if (index >= 9) cookiesArr.push(jdCookieNode[item]);
   });
   if (process.env.JD_DEBUG && process.env.JD_DEBUG === 'false')
     console.log = () => {};
