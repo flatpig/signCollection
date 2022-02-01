@@ -167,3 +167,4 @@
 0 0,12,18 * * * node /scripts/jd_mhyyl.js >> /scripts/logs/jd_mhyyl.log 2>&1
 10 22 * * * node /scripts/jd_mhyyl_prize.js >> /scripts/logs/jd_mhyyl_prize.log 2>&1
 30 3,20 * * * node /scripts/jd_mofang.js >> /scripts/logs/jd_mofang.log 2>&1
+11 0,7 * * * node /scripts/jd_jxlhb.js >> /scripts/logs/jd_jxlhb.log 2>&1
