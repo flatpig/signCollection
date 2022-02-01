@@ -19,7 +19,7 @@
 # 东东世界兑换
 0 0 * * * node /scripts/jd_ddworld_exchange.js >> /scripts/logs/jd_ddworld_exchange.log 2>&1
 # 京东小魔方
-10 2,8,20 * * * node /scripts/jd_mf.js >> /scripts/logs/jd_mf.log 2>&1
+#10 2,8,20 * * * node /scripts/jd_mf.js >> /scripts/logs/jd_mf.log 2>&1
 
 
 ##############长期活动##############
