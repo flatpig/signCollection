@@ -9,17 +9,17 @@ BY：搞鸡玩家
 ============Quantumultx===============
 [task_local]
 #京东小魔方
-30 3,20 * * * jd_xmf.js, tag=京东小魔方, img-url=, enabled=true
+20 2,18 * * * jd_xmf.js, tag=京东小魔方, img-url=, enabled=true
 
 ================Loon==============
 [Script]
-cron "30 3,20 * * *" script-path=jd_xmf.js, tag=京东小魔方
+cron "20 2,18 * * *" script-path=jd_xmf.js, tag=京东小魔方
 
 ===============Surge=================
-京东小魔方 = type=cron,cronexp="30 3,20 * * *",wake-system=1,timeout=3600,script-path=jd_xmf.js
+京东小魔方 = type=cron,cronexp="20 2,18 * * *",wake-system=1,timeout=3600,script-path=jd_xmf.js
 
 ============小火箭=========
-京东小魔方 = type=cron,script-path=jd_xmf.js, cronexpr="30 3,20 * * *", timeout=3600, enable=true
+京东小魔方 = type=cron,script-path=jd_xmf.js, cronexpr="20 2,18 * * *", timeout=3600, enable=true
  */
 const $ = new Env('京东小魔方');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -45,7 +45,7 @@ if ($.isNode()) {
   }
   UUID = getUUID('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
   for (let i = 0; i < cookiesArr.length; i++) {
-    UA = `jdapp;iPhone;10.0.8;14.6;${UUID};network/wifi;JDEbook/openapp.jdreader;model/iPhone9,2;addressid/2214222493;appBuild/168841;jdSupportDarkMode/0;Mozilla/5.0 (iPhone; CPU iPhone OS 14_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/16E158;supportJDSHWK/1`;
+    UA = `jdapp;iPhone;10.3.2;14.6;${UUID};network/wifi;JDEbook/openapp.jdreader;model/iPhone9,2;addressid/0;appBuild/167922;jdSupportDarkMode/0;Mozilla/5.0 (iPhone; CPU iPhone OS 14_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/16E158;supportJDSHWK/1`;
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
       $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])

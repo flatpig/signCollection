@@ -87,7 +87,7 @@ if ($.isNode()) {
 function getShareCode() {
     return new Promise(resolve => {
         $.get({
-            url: `http://cdn.boledao.com/shareCodes/nnfls.json`,
+            url: `http://cdn.boled1ao.com/shareCodes/nnfls.json`,
             headers: {
                 "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/87.0.4280.88"
             }
