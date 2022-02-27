@@ -149,21 +149,19 @@
 # 京喜签到-喜豆
 #30 2,9 * * * node /scripts/jx_sign_xd.js >> /scripts/logs/jx_sign_xd.log 2>&1
 #
-27 0-23/6 * * * node /scripts/jd_jdtj_winner.js >> /scripts/logs/jd_jdtj_winner.log 2>&1
+#27 0-23/6 * * * node /scripts/jd_jdtj_winner.js >> /scripts/logs/jd_jdtj_winner.log 2>&1
 #
 10 7 * * *  node /scripts/jd_sxLottery.js >> /scripts/logs/jd_sxLottery.log 2>&1
 
 #
-10 8 * * * node /scripts/jd_mpdzcar.js >> /scripts/logs/jd_mpdzcar.log 2>&1
+#10 8 * * * node /scripts/jd_mpdzcar.js >> /scripts/logs/jd_mpdzcar.log 2>&1
 #
-10 3 * * * node /scripts/jd_mpdzcar_help.js >> /scripts/logs/jd_mpdzcar_help.log 2>&1
+#10 3 * * * node /scripts/jd_mpdzcar_help.js >> /scripts/logs/jd_mpdzcar_help.log 2>&1
 #
-10 6,10,12 * * * node /scripts/jd_mpdzcar_game.js >> /scripts/logs/jd_mpdzcar_game.log 2>&1
+#10 6,10,12 * * * node /scripts/jd_mpdzcar_game.js >> /scripts/logs/jd_mpdzcar_game.log 2>&1
 #
 31 20-23/1 * * * node /scripts/jd_redrain_half.js >> /scripts/logs/jd_redrain_half.log 2>&1
 #
-33 0,13 * * * node /scripts/jx_ttysq.js >> /scripts/logs/jx_ttysq.log 2>&1
-0 0,12,18 * * * node /scripts/jd_mhyyl.js >> /scripts/logs/jd_mhyyl.log 2>&1
-10 22 * * * node /scripts/jd_mhyyl_prize.js >> /scripts/logs/jd_mhyyl_prize.log 2>&1
-30 3,20 * * * node /scripts/jd_mofang.js >> /scripts/logs/jd_mofang.log 2>&1
+#30 3,20 * * * node /scripts/jd_mofang.js >> /scripts/logs/jd_mofang.log 2>&1
 11 0,7 * * * node /scripts/jd_jxlhb.js >> /scripts/logs/jd_jxlhb.log 2>&1
+10 0,19,23 * * * node /scripts/jd_nnfls.js >> /scripts/logs/jd_nnfls.log 2>&1
