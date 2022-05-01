@@ -150,3 +150,4 @@
 10 0,19,23 * * * node /scripts/jd_nnfls.js >> /scripts/logs/jd_nnfls.log 2>&1
 18 1 * * * node /scripts/jd_plusLottery.js >> /scripts/logs/jd_plusLottery.log 2>&1
 14 10 * * * node /scripts/jd_sign_graphics.js >> /scripts/logs/jd_sign_graphics.log 2>&1
+5 6 * * * node /scripts/jd_jmf.js >> /scripts/logs/jd_jmf.log 2>&1
