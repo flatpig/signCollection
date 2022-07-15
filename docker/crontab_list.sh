@@ -101,31 +101,25 @@
 23 0-23/2 * * * node /scripts/jd_jxmc.js >> /scripts/logs/jd_jxmc.log 2>&1
 30 0-23/3 * * * node /scripts/jd_jxmc_hb.js >> /scripts/logs/jd_jxmc_hb.log 2>&1
 # 京喜工厂开团
-9 0-8/1 * * *  node /scripts/jd_star_dreamFactory_tuan.js >> /scripts/logs/jd_star_dreamFactory_tuan.log 2>&1
+#9 0-8/1 * * *  node /scripts/jd_star_dreamFactory_tuan.js >> /scripts/logs/jd_star_dreamFactory_tuan.log 2>&1
 # 领券中心签到
-11 0 * * * node /scripts/jd_ccSign.js >> /scripts/logs/jd_ccSign.log 2>&1
+#11 0 * * * node /scripts/jd_ccSign.js >> /scripts/logs/jd_ccSign.log 2>&1
 
 # 新增的
 # 汪汪乐园
 0 0,7,9,17,20 * * * node /scripts/jd_joy_park_task.js >> /scripts/logs/jd_joy_park_task.log 2>&1
 # 汪汪乐园养joy
-20 0-23/3 * * * node /scripts/jd_joy_park.js >> /scripts/logs/jd_joy_park.log 2>&1
+#20 0-23/3 * * * node /scripts/jd_joy_park.js >> /scripts/logs/jd_joy_park.log 2>&1
 # 5G超级盲盒
-5 0,1-23/3 * * * node /scripts/jd_mohe.js >> /scripts/logs/jd_mohe.log 2>&1
-5 0,19 * * * node /scripts/jd_mohe_help.js >> /scripts/logs/jd_mohe_help.log 2>&1
+#5 0,1-23/3 * * * node /scripts/jd_mohe.js >> /scripts/logs/jd_mohe.log 2>&1
+#5 0,19 * * * node /scripts/jd_mohe_help.js >> /scripts/logs/jd_mohe_help.log 2>&1
 # 东东乐园领水滴
 11 8 * * * node /scripts/jd_ddly.js >> /scripts/logs/jd_ddly.log 2>&1
 # 积分换话费
-13 5,17 * * * node /scripts/jd_dwapp.js >> /scripts/logs/jd_dwapp.log 2>&1
-# 金贴小程序
-45 0,12,14 * * * node /scripts/jd_jintie_wx.js >> /scripts/logs/jd_jintie_wx.log 2>&1
-# 直播间抽奖(全局)
-5 12 * * 6 node /scripts/jd_live_lottery_social.js >> /scripts/logs/jd_live_lottery_social.log 2>&1
+#s13 5,17 * * * node /scripts/jd_dwapp.js >> /scripts/logs/jd_dwapp.log 2>&1
 
 # 京喜购物返红包助力
 4 0-23/6 * * * node /scripts/jd_jx_cashback.js >> /scripts/logs/jd_jx_cashback.log 2>&1
-# 京东图形签到
-3 0 * * * node /scripts/jd_m_sign.js >> /scripts/logs/jd_m_sign.log 2>&1
 # 签到免单
 18 8,12,20 * * * node /scripts/jd_speed_signfree.js >> /scripts/logs/jd_speed_signfree.log 2>&1
 # 牛牛福利
@@ -137,17 +131,5 @@
 # 京东金榜
 13 6 * * * node /scripts/jd_gold_sign.js >> /scripts/logs/jd_gold_sign.log 2>&1
 #
-10 7 * * * node /scripts/jd_lxLottery.js >> /scripts/logs/jd_lxLottery.log 2>&1
-#
-10 7 * * *  node /scripts/jd_sxLottery.js >> /scripts/logs/jd_sxLottery.log 2>&1
-
-
-#
-31 20-23/1 * * * node /scripts/jd_redrain_half.js >> /scripts/logs/jd_redrain_half.log 2>&1
-#
-35 8,12 * * * node /scripts/jd_nzmh.js >> /scripts/logs/jd_nzmh.log 2>&1
 11 0,7 * * * node /scripts/jd_jxlhb.js >> /scripts/logs/jd_jxlhb.log 2>&1
 10 0,19,23 * * * node /scripts/jd_nnfls.js >> /scripts/logs/jd_nnfls.log 2>&1
-18 1 * * * node /scripts/jd_plusLottery.js >> /scripts/logs/jd_plusLottery.log 2>&1
-14 10 * * * node /scripts/jd_sign_graphics.js >> /scripts/logs/jd_sign_graphics.log 2>&1
-5 6 * * * node /scripts/jd_jmf.js >> /scripts/logs/jd_jmf.log 2>&1
